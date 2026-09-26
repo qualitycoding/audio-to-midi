@@ -1,4 +1,5 @@
 import type { BeatGrid, NoteEvent, StemKind, DetectionMode, PitchFrame } from '../core/types';
+import type { LabelledEvent } from './noteLane';
 import type { Tuning } from '../core/types';
 import { TUNINGS, type TuningId } from '../core/tunings';
 
@@ -17,8 +18,9 @@ export interface StemState {
   analysis: 'pending' | 'running' | 'done' | 'error';
   notes: NoteEvent[];
   pitchFrames: PitchFrame[];
-  labels: string[];
-  labelTimes: number[];
+  /** Cached chord/note labels for `notes`; recompute only when `notes` changes (perf: avoids
+   *  redoing tonal chord detection on every render/zoom frame). */
+  labelledEvents: import('./noteLane').LabelledEvent[];
   analysisToken: number; // bumped to cancel an in-flight run
 }
 

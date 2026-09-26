@@ -18,7 +18,13 @@ export class Player {
   async play(stems: readonly PlayerStem[], indices: readonly number[], offsetSec: number): Promise<void> {
     this.stopInternal();
     const ctx = this.ensureCtx();
-    if (ctx.state === 'suspended') await ctx.resume();
+    if (ctx.state === 'suspended') {
+      // Some browsers' resume() only resolves on a fresh user gesture and can hang indefinitely
+      // in automated/headless contexts (observed: Firefox in CI). Race it so playback scheduling
+      // is never blocked on it — nodes scheduled on a still-suspended context simply start once
+      // it does resume.
+      await Promise.race([ctx.resume(), new Promise((r) => setTimeout(r, 500))]);
+    }
     const t0 = performance.now();
     const use = indices.length ? indices : stems.map((_, i) => i);
     const when = ctx.currentTime + 0.05;

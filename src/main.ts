@@ -6,7 +6,7 @@ import { zoomAt, clampViewport } from './core/viewport';
 import { TUNINGS, type TuningId } from './core/tunings';
 import { freqToPitch } from './core/notes';
 import { createWaveformRenderer, type WaveformRenderer } from './ui/waveform';
-import { computeLabels, renderNoteLane } from './ui/noteLane';
+import { computeLabels, renderNoteLane, type LabelledEvent } from './ui/noteLane';
 import { Player, type PlayerStem } from './audio/player';
 import { exportMidi, exportAsciiTab, exportMusicXml } from './ui/export';
 import { createInitialState, defaultTuning, defaultModeFor, type StemState } from './ui/state';
@@ -70,7 +70,7 @@ function renderAll(): void {
     const r = renderers.get(s.id);
     if (r) r.render(state.viewport, state.grid);
     const lane = document.querySelector<HTMLElement>(`[data-stem-id="${s.id}"] .note-lane`);
-    if (lane) renderNoteLane(lane, computeLabels(s.notes), state.viewport);
+    if (lane) renderNoteLane(lane, s.labelledEvents, state.viewport);
   }
 }
 
@@ -164,14 +164,14 @@ function addStemRow(s: StemState): void {
 
 async function triggerAnalysis(s: StemState & { decodeMs?: number }): Promise<void> {
   const token = ++s.analysisToken;
-  if (s.kind === 'unpitched') { s.analysis = 'done'; s.notes = []; s.pitchFrames = []; renderAll(); return; }
+  if (s.kind === 'unpitched') { s.analysis = 'done'; s.notes = []; s.pitchFrames = []; s.labelledEvents = []; renderAll(); return; }
   s.analysis = 'running'; renderAll();
   const hasLowString = Math.min(...s.tuning) < 21;
   const t0 = performance.now();
   try {
     const result = await analyseStem(s.mono, s.sampleRate, s.mode, state.a4Hz, hasLowString, BASE, () => {});
     if (token !== s.analysisToken) return; // superseded by a later change
-    s.notes = result.notes; s.pitchFrames = result.pitchFrames; s.analysis = 'done';
+    s.notes = result.notes; s.pitchFrames = result.pitchFrames; s.labelledEvents = computeLabels(result.notes); s.analysis = 'done';
     state.backend = result.backend;
     lastPerfLog = { stemSeconds: s.durationSec, decodeMs: s.decodeMs ?? 0, analysisMs: performance.now() - t0, backend: result.backend };
   } catch (err) {
@@ -206,7 +206,7 @@ fileInput.addEventListener('change', async () => {
       const s: StemState & { decodeMs: number } = {
         id: nextId++, name: f.name, kind, tuningId: t.id, tuning: t.tuning, mode: defaultModeFor(kind),
         selected: true, gain: 1, sampleRate: decoded.sampleRate, mono: decoded.mono, durationSec: decoded.durationSec,
-        analysis: 'pending', notes: [], pitchFrames: [], labels: [], labelTimes: [], analysisToken: 0,
+        analysis: 'pending', notes: [], pitchFrames: [], labelledEvents: [], analysisToken: 0,
         decodeMs: performance.now() - t0,
       };
       state.stems.push(s);
@@ -274,7 +274,7 @@ if (TEST_MODE) {
       gridLinesVisible: gridLines(state.grid, state.viewport.startSec, state.viewport.startSec + state.viewport.widthPx * state.viewport.secPerPx).length,
       stems: state.stems.map((s) => ({
         name: s.name, selected: s.selected, kind: s.kind, analysis: s.analysis,
-        notes: s.notes.length, labels: computeLabels(s.notes).map((l) => l.label),
+        notes: s.notes.length, labels: s.labelledEvents.map((l) => l.label),
       })),
       player: {
         playing: player.playing,
