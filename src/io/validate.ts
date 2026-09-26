@@ -9,3 +9,7 @@ export function validateSelection(files: readonly FileLike[], alreadyLoaded: num
 export function validateDecoded(durationSec: number): void { throw new NotImplementedError('validateDecoded'); }
 /** Mix N channels to mono by averaging. */
 export function mixToMono(channels: readonly Float32Array[]): Float32Array { throw new NotImplementedError('mixToMono'); }
+/** D-030 (R-010): decoded-audio memory budget. deviceMemoryGB from navigator.deviceMemory (undefined when unsupported). */
+export function memoryBudgetBytes(deviceMemoryGB?: number): number { throw new NotImplementedError('memoryBudgetBytes'); }
+/** True if a newly decoded stem of `newBytes` fits alongside `loadedBytes` already held. */
+export function fitsBudget(loadedBytes: number, newBytes: number, budgetBytes: number): boolean { throw new NotImplementedError('fitsBudget'); }

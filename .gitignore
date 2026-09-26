@@ -4,3 +4,5 @@ tests/fixtures/audio/
 perf/results/*.tmp
 playwright-report/
 test-results/
+public/models/
+public/tfjs-wasm/

@@ -1,0 +1,27 @@
+# Installed to .github/workflows/deploy.yml by S-001 (D-005, D-029). Runs ONLY after G-002 approval (environment reviewer).
+name: deploy
+on:
+  workflow_dispatch:
+    inputs: { ref: { description: 'commit or tag to deploy', required: true } }
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: false }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ inputs.ref }}' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22.22.2', cache: npm }
+      - run: npm ci && npm run verify:freeze && npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.d.outputs.page_url }}' }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+      - run: sleep 30 && tests/deploy/smoke.sh https://qualitycoding.github.io/audio-to-midi/   # T-032

@@ -29,3 +29,13 @@ describe('T-015 perf report schema', () => {
   it.each(['analysisMs', 'device', 'timestampUtc', 'backend'])('rejects a report missing %s', (k) => { const x: Record<string, unknown> = { ...ok }; delete x[k]; expect(() => validatePerfReport(x)).toThrow(/invalid perf report/i); });
   it('rejects negative timings and a wrong schema tag', () => { expect(() => validatePerfReport({ ...ok, decodeMs: -1 })).toThrow(/invalid perf report/i); expect(() => validatePerfReport({ ...ok, schema: 'x' })).toThrow(/invalid perf report/i); });
 });
+/** T-017 — SC-1, SC-14 (no out-of-memory on mobile); R-010, D-030. */
+import { memoryBudgetBytes, fitsBudget } from '../../src/io/validate';
+describe('T-017 memory budget', () => {
+  it('uses 400 MB on devices reporting <= 4 GB, else 1.5 GB (also when unknown)', () => {
+    expect(memoryBudgetBytes(2)).toBe(400e6); expect(memoryBudgetBytes(4)).toBe(400e6); expect(memoryBudgetBytes(8)).toBe(1.5e9); expect(memoryBudgetBytes(undefined)).toBe(1.5e9);
+  });
+  it('admits a stem only if the running total stays within budget', () => {
+    expect(fitsBudget(300e6, 100e6, 400e6)).toBe(true); expect(fitsBudget(300e6, 100e6 + 1, 400e6)).toBe(false);
+  });
+});
