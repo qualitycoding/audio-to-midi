@@ -33,7 +33,7 @@ jobs:
       - run: npx playwright test --project=${{ matrix.project }}   # T-020..T-027, T-030
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: e2e-${{ matrix.project }}, path: playwright-report }
+        with: { name: 'e2e-${{ matrix.project }}', path: playwright-report }
   perf:
     needs: unit
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
       - run: npx playwright test --project=${{ matrix.project }}   # T-028 / T-029
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: perf-${{ matrix.project }}, path: perf/results }
+        with: { name: 'perf-${{ matrix.project }}', path: perf/results }
   prod-smoke:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
