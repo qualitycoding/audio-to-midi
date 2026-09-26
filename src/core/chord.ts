@@ -1,6 +1,9 @@
-import { NotImplementedError } from './errors';
-/** Label for simultaneous notes (D-012): best tonal chord name with sharps (e.g. "Am7", "C#m"),
- *  or the sorted note names joined by spaces when no chord matches or fewer than 3 pitch classes. */
-export function labelSimultaneous(midis: readonly number[]): string { throw new NotImplementedError('labelSimultaneous'); }
-/** Group notes whose onsets fall within `windowSec` (default 0.05) into simultaneities. */
-export function groupSimultaneous<T extends { startSec: number }>(notes: readonly T[], windowSec?: number): T[][] { throw new NotImplementedError('groupSimultaneous'); }
+import { Chord } from 'tonal'; import { midiToName } from './notes';
+export function labelSimultaneous(midis: readonly number[]): string {
+  const s = [...midis].sort((a, b) => a - b); const pcs = [...new Set(s.map((m) => midiToName(m).replace(/-?\d+$/, '')))];
+  const names = [...new Set(s)].map(midiToName).join(' ');
+  if (pcs.length < 3) return names; const d = Chord.detect(pcs); if (!d.length) return names;
+  return d[0].replace(/^([A-G]#?)M$/, '$1'); }
+export function groupSimultaneous<T extends { startSec: number }>(notes: readonly T[], w = 0.05): T[][] {
+  const s = [...notes].sort((a, b) => a.startSec - b.startSec); const out: T[][] = [];
+  for (const n of s) { const g = out.at(-1); if (g && n.startSec - g[0].startSec <= w) g.push(n); else out.push([n]); } return out; }

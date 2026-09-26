@@ -1,0 +1,14 @@
+/* S-008: minimal, functional styling — no design system dependency. */
+:root { color-scheme: light dark; --gap: 0.5rem; }
+body { font-family: system-ui, sans-serif; margin: 0; padding: var(--gap); }
+.transport { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: center; margin-bottom: var(--gap); }
+.transport input[type="number"] { width: 5.5rem; }
+[data-testid="alerts"]:empty { display: none; }
+[data-testid="alerts"] { background: #fee; border: 1px solid #c00; padding: 0.5rem; margin-bottom: var(--gap); }
+.stem { border: 1px solid #8884; border-radius: 6px; padding: var(--gap); margin-bottom: var(--gap); }
+.stem-header { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: center; margin-bottom: 0.25rem; }
+.stem-name { font-weight: 600; margin-right: auto; }
+canvas[data-testid="waveform"] { display: block; width: 100%; height: 90px; background: #1118; touch-action: none; }
+.note-lane { display: block; width: 100%; height: 28px; overflow: hidden; white-space: nowrap; font-size: 11px; position: relative; background: #8882; }
+.note-label { position: absolute; top: 2px; padding: 0 2px; }
+.readout { font-variant-numeric: tabular-nums; font-size: 12px; opacity: 0.8; }

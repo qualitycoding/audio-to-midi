@@ -1,6 +1,6 @@
-import { NotImplementedError } from './errors';
 export interface Peaks { samplesPerBin: number; min: Float32Array; max: Float32Array; }
-/** Min/max per bin of `samplesPerBin` samples; length = ceil(n / samplesPerBin). D-019 */
-export function computePeaks(samples: Float32Array, samplesPerBin: number): Peaks { throw new NotImplementedError('computePeaks'); }
-/** Pyramid levels at samplesPerBin = base * 2^k until one bin covers the whole signal. */
-export function buildPyramid(samples: Float32Array, base?: number): Peaks[] { throw new NotImplementedError('buildPyramid'); }
+export function computePeaks(x: Float32Array, spb: number): Peaks { if (!(spb >= 1)) throw new RangeError('samplesPerBin must be >= 1');
+  const n = Math.ceil(x.length / spb), mn = new Float32Array(n), mx = new Float32Array(n);
+  for (let b = 0; b < n; b++) { let lo = Infinity, hi = -Infinity; for (let i = b * spb; i < Math.min(x.length, (b + 1) * spb); i++) { if (x[i] < lo) lo = x[i]; if (x[i] > hi) hi = x[i]; } mn[b] = lo; mx[b] = hi; }
+  return { samplesPerBin: spb, min: mn, max: mx }; }
+export function buildPyramid(x: Float32Array, base = 16): Peaks[] { const out: Peaks[] = []; for (let s = base; ; s *= 2) { out.push(computePeaks(x, s)); if (s >= x.length) break; } return out; }
