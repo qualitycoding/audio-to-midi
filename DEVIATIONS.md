@@ -68,3 +68,12 @@ transform). Vite's production bundler rejected this (`@spotify/basic-pitch` has 
 Fixed to `import { BasicPitch, ... } from '@spotify/basic-pitch'`. Behaviourally identical; caught by
 `npm run build`, not by the frozen tests (they run under Vitest, not the Vite app bundler). No test
 was touched.
+
+## 6. `playStartLatencyMs` in the frozen perf harness is always 0 (evidence caveat)
+`tests/e2e/perf.spec.ts` (frozen) calls `window.__a2m.bench()` without ever clicking `play`, so
+`Player.lastStartLatencyMs` is always `null` and `bench()`'s `?? 0` fallback reports `0` regardless
+of real playback-start latency. Both the desktop and mobile PerfReport JSONs in `perf/results/`
+therefore have a `playStartLatencyMs` of 0 that is not a real measurement. I did not touch the
+frozen spec to fix this — noted in `perf/MOBILE.md` as a disclosed gap (Rule 9) for the plan owner
+to decide whether to accept, or unfreeze/extend `perf.spec.ts` to actually exercise `play` before
+calling `bench()`.
