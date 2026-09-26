@@ -39,7 +39,30 @@ configured, because implementing this step requires push credentials this sessio
 person's security guidance). This is step S-001 exactly as specified in the plan — not a deviation
 from it — just not yet executed.
 
-## 4. `basic-pitch`'s named ESM exports, not its default export
+## 4. Firefox headless has no working Web Audio clock on the GitHub-hosted Linux CI runner (T-022, T-025)
+**Symptom:** on the `firefox` e2e project only, `player.playing` initially never became true (fixed —
+`AudioContext.resume()` was hanging; see the fix commit), and after that fix, `currentTimeSec()`
+never advances past 0 within 5s even though `playing` is true and scheduling succeeded.
+**Cause:** this is a documented upstream limitation, not an app bug: headless Firefox in the
+official Playwright Linux/Docker images has a broken Web Audio API (microsoft/playwright#18206,
+open since 2022, Linux/docker-specific). `ctx.currentTime` simply does not advance because the
+audio render thread isn't actually running. Chromium and WebKit e2e projects pass T-022 and T-025
+with the identical app code and identical test, which is strong evidence this is engine/platform,
+not application logic.
+**What I did:** the `AudioContext.resume()` race (Player.play) is a real, worthwhile fix — it stops
+Firefox from hanging the transport indefinitely — and is kept regardless. I did not attempt to work
+around the deeper "clock doesn't tick" limitation (e.g. by faking `currentTimeSec()` from a
+`setInterval` instead of reading `ctx.currentTime`, which would make the app lie about playback
+position on every browser to paper over one browser's headless CI quirk) and did not skip or soften
+T-022/T-025 for the firefox project, since that would be altering a frozen test's effective
+coverage. Per DR-11, this stays open rather than being silently worked around: **T-022 and T-025 on
+the `firefox` e2e project are expected to stay red in this CI environment** until either (a)
+Playwright/Firefox fixes the upstream issue, or (b) someone decides to run Firefox e2e headed under
+Xvfb instead of headless (an infrastructure change to `.github/workflows/ci.yml`, out of scope for
+this pass), or (c) a human reviewing this explicitly accepts it as a known gap for real Safari/
+Firefox users (who are not headless and are not affected).
+
+## 5. `basic-pitch`'s named ESM exports, not its default export
 `transcribe.ts` originally imported `pkg` as a CJS default export (works under ts-node/Vitest's
 transform). Vite's production bundler rejected this (`@spotify/basic-pitch` has no default export).
 Fixed to `import { BasicPitch, ... } from '@spotify/basic-pitch'`. Behaviourally identical; caught by

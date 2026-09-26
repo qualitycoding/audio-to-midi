@@ -166,7 +166,10 @@ async function triggerAnalysis(s: StemState & { decodeMs?: number }): Promise<vo
   const token = ++s.analysisToken;
   if (s.kind === 'unpitched') { s.analysis = 'done'; s.notes = []; s.pitchFrames = []; s.labelledEvents = []; renderAll(); return; }
   s.analysis = 'running'; renderAll();
-  const hasLowString = Math.min(...s.tuning) < 21;
+  // D-023: run the sub-A0 tracker for kind 'bass' regardless of the currently selected tuning
+  // preset (a bass stem can sound below A0 even when the default bass4 tuning is still selected),
+  // and also whenever the selected tuning's own lowest string reaches that low (e.g. guitar8/bass7).
+  const hasLowString = s.kind === 'bass' || Math.min(...s.tuning) < 21;
   const t0 = performance.now();
   try {
     const result = await analyseStem(s.mono, s.sampleRate, s.mode, state.a4Hz, hasLowString, BASE, () => {});

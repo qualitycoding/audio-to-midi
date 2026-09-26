@@ -15,17 +15,28 @@ export interface BenchDeps {
 
 declare const __APP_COMMIT__: string;
 
+/**
+ * Times the synchronous cost of one zoom step (viewport recompute + waveform/grid/note-lane
+ * redraw) directly with performance.now(), rather than measuring the interval between
+ * requestAnimationFrame callbacks. Headless Chromium (as used by the CI runners this bench also
+ * runs under) has no real compositor and ticks rAF on a fixed simulated ~16.7ms cadence regardless
+ * of actual work done, which would make every measurement read a near-constant ~16.7ms no matter
+ * how cheap or expensive the render itself is — confirmed by two separate CI runs producing the
+ * bit-for-bit identical value 16.69999999999709. Timing the call directly measures the thing
+ * SC-13 actually cares about (how long the zoom operation's own work takes) and isn't coupled to
+ * any particular browser's frame-pump behaviour.
+ */
 async function measureZoomFrames(zoomStep: (f: number) => void, steps = 60): Promise<number[]> {
-  const deltas: number[] = [];
-  let last = performance.now();
+  const durations: number[] = [];
   for (let i = 0; i < steps; i++) {
+    const t0 = performance.now();
     zoomStep(i % 2 === 0 ? 1.1 : 1 / 1.1);
+    durations.push(performance.now() - t0);
+    // Yield to the event loop / paint between steps so this still resembles interactive use
+    // rather than a tight synchronous loop.
     await new Promise<void>((r) => requestAnimationFrame(() => r()));
-    const now = performance.now();
-    deltas.push(now - last);
-    last = now;
   }
-  return deltas;
+  return durations;
 }
 
 function percentile(sorted: number[], p: number): number {
