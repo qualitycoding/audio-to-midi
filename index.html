@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- D-024 CSP (frozen policy text lives in plan/DECISIONS.md; T-026 checks it) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>audio-to-midi</title>
+</head>
+<body>
+  <main id="app"><!-- STUB: UI built in S-008..S-012 per D-025 --></main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
