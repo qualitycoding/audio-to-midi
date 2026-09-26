@@ -5,7 +5,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule: [{ cron: '0 6 * * 1' }]
-permissions: { contents: read, issues: write }
+permissions: { contents: write, issues: write }
 jobs:
   unit:
     runs-on: ubuntu-latest
@@ -30,10 +30,25 @@ jobs:
         with: { node-version: '22.22.2', cache: npm }
       - run: npm ci && npm run fixtures
       - run: npx playwright install --with-deps chromium firefox webkit
-      - run: npx playwright test --project=${{ matrix.project }}   # T-020..T-027, T-030
+      - name: Run e2e
+        run: npx playwright test --project=${{ matrix.project }} --reporter=list,json   # T-020..T-027, T-030
+        env: { PLAYWRIGHT_JSON_OUTPUT_NAME: pw-results.json }
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: 'e2e-${{ matrix.project }}', path: playwright-report }
+      - name: Extract diagnostics (planning-agent readable, not part of the frozen suite)
+        if: always()
+        run: node .github/scripts/pw-diagnostics.mjs pw-results.json "${{ matrix.project }}"
+      - name: Publish diagnostics branch
+        if: always()
+        run: |
+          git config user.name ci-diagnostics-bot
+          git config user.email ci-diagnostics-bot@users.noreply.github.com
+          git checkout --orphan "ci-diag/e2e-${{ matrix.project }}"
+          git reset
+          git add ci-diagnostics.json
+          git commit -m "diagnostics: e2e ${{ matrix.project }} run ${{ github.run_id }}"
+          git push --force origin "HEAD:ci-diag/e2e-${{ matrix.project }}"
   perf:
     needs: unit
     runs-on: ubuntu-latest
@@ -44,10 +59,26 @@ jobs:
         with: { node-version: '22.22.2', cache: npm }
       - run: npm ci && npm run fixtures
       - run: npx playwright install --with-deps chromium
-      - run: npx playwright test --project=${{ matrix.project }}   # T-028 / T-029
+      - name: Run perf
+        run: npx playwright test --project=${{ matrix.project }} --reporter=list,json   # T-028 / T-029
+        env: { PLAYWRIGHT_JSON_OUTPUT_NAME: pw-results.json }
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: 'perf-${{ matrix.project }}', path: perf/results }
+      - name: Extract diagnostics (planning-agent readable, not part of the frozen suite)
+        if: always()
+        run: node .github/scripts/pw-diagnostics.mjs pw-results.json "${{ matrix.project }}"
+      - name: Publish diagnostics branch
+        if: always()
+        run: |
+          git config user.name ci-diagnostics-bot
+          git config user.email ci-diagnostics-bot@users.noreply.github.com
+          git checkout --orphan "ci-diag/perf-${{ matrix.project }}"
+          git reset
+          git add ci-diagnostics.json
+          if [ -d perf/results ]; then cp -r perf/results perf-results && git add perf-results; fi
+          git commit -m "diagnostics: perf ${{ matrix.project }} run ${{ github.run_id }}"
+          git push --force origin "HEAD:ci-diag/perf-${{ matrix.project }}"
   prod-smoke:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
