@@ -11,6 +11,7 @@ import { Player, type PlayerStem } from './audio/player';
 import { exportMidi, exportAsciiTab, exportMusicXml } from './ui/export';
 import { createInitialState, defaultTuning, defaultModeFor, type StemState } from './ui/state';
 import { runBench, type PerfLog } from './perf/bench';
+import { synthBenchStem } from './perf/synthFixture';
 import type { StemKind, DetectionMode } from './core/types';
 
 void validateDecoded; void MAX_STEMS; // exercised inside io/validate.ts and decode.ts
@@ -117,7 +118,7 @@ function reflectSelects(wrap: HTMLElement, s: StemState): void {
   (wrap.querySelector('[data-testid="stem-mode"]') as HTMLSelectElement).value = s.mode;
 }
 
-function addStemRow(s: StemState): void {
+function addStemRow(s: StemState): Promise<void> {
   const wrap = document.createElement('div');
   wrap.className = 'stem'; wrap.dataset.testid = 'stem'; wrap.dataset.stemId = String(s.id);
   wrap.innerHTML = stemRowHtml(s);
@@ -159,7 +160,7 @@ function addStemRow(s: StemState): void {
     } else readout.textContent = '';
   });
 
-  void triggerAnalysis(s);
+  return triggerAnalysis(s);
 }
 
 async function triggerAnalysis(s: StemState & { decodeMs?: number }): Promise<void> {
@@ -266,6 +267,66 @@ $('[data-testid="export-tab-txt"]').addEventListener('click', () => exportAsciiT
 $('[data-testid="export-musicxml"]').addEventListener('click', () => exportMusicXml(state.stems, state.grid));
 
 renderAll();
+
+// ---- on-page bench panel (?bench=1): lets a phone with no devtools run T-028/T-029 with one tap ---
+if (BENCH_MODE) {
+  const panel = document.createElement('section');
+  panel.style.cssText = 'border:2px solid #d97706;border-radius:8px;padding:0.75rem;margin-bottom:1rem;';
+  panel.innerHTML = `
+    <h2 style="margin:0 0 0.5rem;font-size:1rem;">Performance bench</h2>
+    <label>Device label <input data-testid="bench-device" type="text" style="width:100%;box-sizing:border-box;" /></label>
+    <button data-testid="bench-run" type="button" style="margin-top:0.5rem;">Generate 240s test stem &amp; run bench</button>
+    <p data-testid="bench-status" style="opacity:0.8;"></p>
+    <textarea data-testid="bench-result" readonly rows="12" style="width:100%;box-sizing:border-box;font-family:monospace;font-size:11px;display:none;"></textarea>
+    <button data-testid="bench-copy" type="button" style="display:none;margin-top:0.25rem;">Copy result</button>`;
+  document.querySelector('#app')!.insertBefore(panel, stemsEl);
+
+  const deviceInput = panel.querySelector<HTMLInputElement>('[data-testid="bench-device"]')!;
+  const ua = navigator.userAgent;
+  deviceInput.value = /iPhone|iPad/.test(ua) ? 'iPhone (real device)' : /Android/.test(ua) ? 'Android phone (real device)' : 'unknown device';
+  const runBtn = panel.querySelector<HTMLButtonElement>('[data-testid="bench-run"]')!;
+  const statusEl = panel.querySelector<HTMLElement>('[data-testid="bench-status"]')!;
+  const resultEl = panel.querySelector<HTMLTextAreaElement>('[data-testid="bench-result"]')!;
+  const copyBtn = panel.querySelector<HTMLButtonElement>('[data-testid="bench-copy"]')!;
+
+  runBtn.addEventListener('click', async () => {
+    runBtn.disabled = true; resultEl.style.display = 'none'; copyBtn.style.display = 'none';
+    try {
+      statusEl.textContent = 'Generating 240 s test stem…';
+      const mono = synthBenchStem();
+      const t0 = performance.now();
+      const stem: StemState & { decodeMs: number } = {
+        id: nextId++, name: 'bench-240s.wav', kind: 'pitched', tuningId: 'guitar6', tuning: TUNINGS.guitar6, mode: 'poly',
+        selected: true, gain: 1, sampleRate: 44100, mono, durationSec: mono.length / 44100,
+        analysis: 'pending', notes: [], pitchFrames: [], labelledEvents: [], analysisToken: 0,
+        decodeMs: performance.now() - t0,
+      };
+      state.stems.push(stem);
+      statusEl.textContent = 'Analysing… this can take a few minutes on a phone.';
+      await addStemRow(stem);
+      refitViewportBounds();
+      statusEl.textContent = 'Measuring zoom responsiveness and assembling the report…';
+      const report = await runBench(deviceInput.value || 'unknown device', {
+        log: () => lastPerfLog,
+        zoomStep: (f: number) => applyZoom(f),
+        playStartLatencyMs: () => player.lastStartLatencyMs,
+      });
+      resultEl.value = JSON.stringify(report, null, 2);
+      resultEl.style.display = ''; copyBtn.style.display = '';
+      statusEl.textContent = 'Done — copy the result below and send it back.';
+    } catch (err) {
+      statusEl.textContent = `Bench failed: ${(err as Error).message}`;
+    } finally {
+      runBtn.disabled = false;
+    }
+  });
+  copyBtn.addEventListener('click', async () => {
+    resultEl.focus(); resultEl.select();
+    try { await navigator.clipboard.writeText(resultEl.value); copyBtn.textContent = 'Copied!'; }
+    catch { copyBtn.textContent = 'Select failed — text is selected, copy manually'; }
+    setTimeout(() => { copyBtn.textContent = 'Copy result'; }, 2000);
+  });
+}
 
 // ---- test hook (D-025) ---------------------------------------------------------
 if (TEST_MODE) {
