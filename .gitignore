@@ -1,0 +1,8 @@
+node_modules/
+dist/
+tests/fixtures/audio/
+perf/results/*.tmp
+playwright-report/
+test-results/
+public/models/
+public/tfjs-wasm/

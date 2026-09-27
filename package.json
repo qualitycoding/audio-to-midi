@@ -1,0 +1,43 @@
+{
+  "name": "audio-to-midi",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "vitest run --project unit",
+    "test:accuracy": "vitest run --project accuracy",
+    "test:e2e": "playwright test",
+    "test:perf-mobile": "playwright test --project=mobile-perf",
+    "fixtures": "node tests/fixtures/make-fixtures.mjs",
+    "verify:freeze": "sha256sum -c tests/FROZEN_MANIFEST.sha256",
+    "audit": "npm audit --omit=dev --audit-level=high",
+    "prebuild": "node scripts/copy-assets.mjs",
+    "predev": "node scripts/copy-assets.mjs"
+  },
+  "dependencies": {
+    "@spotify/basic-pitch": "1.0.1",
+    "@tensorflow/tfjs": "3.21.0",
+    "@tensorflow/tfjs-backend-wasm": "3.21.0",
+    "@tonejs/midi": "2.0.28",
+    "pitchy": "4.1.0",
+    "tonal": "6.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.20.4",
+    "jsdom": "^27.4.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.1",
+    "vitest": "5.0.2"
+  },
+  "overrides": {
+    "@tensorflow/tfjs": "3.21.0"
+  }
+}
