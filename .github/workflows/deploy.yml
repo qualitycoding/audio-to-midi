@@ -2,7 +2,7 @@
 name: deploy
 on:
   workflow_dispatch:
-    inputs: { ref: { description: 'commit or tag to deploy', required: true } }
+    inputs: { ref: { description: 'commit or tag to deploy', required: true, default: 'impl/v0.1' } }
 permissions: { contents: read, pages: write, id-token: write }
 concurrency: { group: pages, cancel-in-progress: false }
 jobs:
@@ -24,4 +24,5 @@ jobs:
       - id: d
         uses: actions/deploy-pages@v4
       - uses: actions/checkout@v4
+        with: { ref: '${{ inputs.ref }}' }
       - run: sleep 30 && tests/deploy/smoke.sh https://qualitycoding.github.io/audio-to-midi/   # T-032
