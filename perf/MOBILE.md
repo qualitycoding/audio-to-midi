@@ -24,10 +24,24 @@ numerically there). This is a gap in the frozen test's coverage, not something t
 fix without editing a frozen file; flagged here rather than silently accepted as a passing number.
 
 ## Real-device figures (G-003)
-None collected yet. To add some: build a preview (`npm run build && npx vite preview --host`),
-open `http://<host-ip>:4173/audio-to-midi/?test=1&bench=1` on a real phone, load
-`tests/fixtures/audio/long240.wav`, run `await window.__a2m.bench('<device name>')` from the
-console (or wire a temporary button), and paste the resulting JSON back for validation.
+Collected via the on-page bench panel (`?bench=1`, no devtools needed) at
+https://qualitycoding.github.io/audio-to-midi/?test=1&bench=1, deployed commit `216ea2e`.
+
+| Metric | Real Android phone (Chrome Mobile 153, 8 cores) |
+|---|---|
+| Stem length | 240 s |
+| Backend | wasm |
+| Decode | ~0 ms (synthetic in-memory stem, no file decode) |
+| Analysis | 40.0 s |
+| Realtime factor | 6.01× |
+| Zoom frame, median | 3.4 ms |
+| Zoom frame, p95 | 7 ms |
+| Play-start latency | 0 ms* (see caveat above — bench never clicks play) |
+
+Full validated report: `perf/results/real-android-2026-09-27T111013.json`. This is a real, if
+unspecified, Android phone (user agent doesn't identify the model), running noticeably faster than
+the emulated Pixel 7 CI figure above — plausibly a modern mid/high-end device with a faster wasm
+JIT than the 4×-throttled CI runner. No real iOS/Safari figure collected yet.
 
 ## Cross-browser functional results (same CI run)
 | Project | Result |
