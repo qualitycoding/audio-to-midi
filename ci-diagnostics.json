@@ -1,0 +1,13 @@
+{
+  "project": "webkit",
+  "generatedAt": "2026-09-28T13:04:39.230Z",
+  "stats": {
+    "startTime": "2026-09-28T13:03:33.096Z",
+    "duration": 65854.359,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}
