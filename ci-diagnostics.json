@@ -1,0 +1,13 @@
+{
+  "project": "mobile-webkit",
+  "generatedAt": "2026-09-28T13:04:46.981Z",
+  "stats": {
+    "startTime": "2026-09-28T13:03:43.605Z",
+    "duration": 63098.626,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}
