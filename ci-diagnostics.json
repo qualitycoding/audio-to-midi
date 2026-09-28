@@ -1,0 +1,13 @@
+{
+  "project": "chromium",
+  "generatedAt": "2026-09-28T13:03:56.606Z",
+  "stats": {
+    "startTime": "2026-09-28T13:03:10.636Z",
+    "duration": 45695.014,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}
