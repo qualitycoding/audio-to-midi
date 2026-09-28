@@ -1,0 +1,20 @@
+{
+  "project": "firefox",
+  "generatedAt": "2026-09-28T13:04:25.624Z",
+  "stats": {
+    "startTime": "2026-09-28T13:03:08.852Z",
+    "duration": 76492.974,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "failures": [
+    {
+      "file": "app.spec.ts",
+      "title": "T-022 plays exactly the selected stems and stops",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0.3\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate"
+    }
+  ]
+}
