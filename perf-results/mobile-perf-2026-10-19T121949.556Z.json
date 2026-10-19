@@ -1,0 +1,16 @@
+{
+  "schema": "a2m-perf/1",
+  "appCommit": "d1db1ef",
+  "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Mobile Safari/537.36",
+  "device": "Pixel 7 (emulated, 4x CPU throttle)",
+  "backend": "wasm",
+  "hardwareConcurrency": 4,
+  "stemSeconds": 240,
+  "decodeMs": 130.1999999999971,
+  "analysisMs": 153476.7,
+  "realtimeFactor": 1.5637552801174377,
+  "zoomFrameMsMedian": 7.699999999953434,
+  "zoomFrameMsP95": 11.299999999988358,
+  "playStartLatencyMs": 0,
+  "timestampUtc": "2026-10-19T12:19:49.556Z"
+}
