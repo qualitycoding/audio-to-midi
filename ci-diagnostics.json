@@ -1,0 +1,13 @@
+{
+  "project": "mobile-perf",
+  "generatedAt": "2026-10-26T12:29:49.733Z",
+  "stats": {
+    "startTime": "2026-10-26T12:25:19.903Z",
+    "duration": 268085.49,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}
