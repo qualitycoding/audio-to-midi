@@ -97,3 +97,12 @@ smoke still left the job green — a check that cannot fail, forbidden by protoc
 **Disposition:** dead code + unaudited devDependency; removal proposed in
 `reviews/CODE_REVIEW.md` (A-006), carried as accepted-with-follow-up risk R-025 — not silently
 deleted in this pass because removal is a scope decision for the maintainer.
+
+
+## 9. CI `unit` job now builds the production bundle (workflow substitution, addendum D-036)
+**What:** `npm run build` added to the `unit` job in `.github/workflows/ci.yml` (+ template
+`plan/workflows/ci.yml`, diff-identical). **Why:** lesson L-20261101T041600Z — the basic-pitch
+ESM-default-export breakage (§5) was only caught because the implementer happened to run the
+production build; Vitest and `tsc` both pass on that error class. **Consequence:** PR CI takes a
+bit longer; bundler-only regressions now fail PRs. Logged per Rule 14 (substitutions are
+deviations). No frozen file touched.

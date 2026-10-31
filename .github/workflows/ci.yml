@@ -18,6 +18,7 @@ jobs:
       - run: npm run verify:freeze          # T-034
       - run: npm run audit                  # T-016
       - run: npx tsc --noEmit
+      - run: npm run build                  # L-20261101T041600Z: Vite-bundler-only errors (e.g. ESM default-export) escape Vitest/tsc — build on every PR
       - run: npm test                       # T-001..T-012, T-014, T-015, T-031
       - run: npm run test:accuracy          # T-013
   e2e:

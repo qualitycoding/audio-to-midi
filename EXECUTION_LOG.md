@@ -28,3 +28,5 @@ a lesson, see lessons/)
 | 2026-11-01T04:05Z | A-006 | 1 | pass | — | code review: 0 Critical/0 High; CR-1..CR-9 -> R-030/R-031 + follow-ups; reviews/CODE_REVIEW.md
 | 2026-11-01T04:12Z | A-007 | 1 | pass | — | adversarial battery 11/11 (research/spikes/adversarial-probe.spec.ts); B-1/B-2/B-7 Low+Info; reviews/ADVERSARIAL_REVIEW.md
 | 2026-11-01T04:14Z | A-008 | 1 | pass | — | S-MUTATE opt-out D-032; reviews/MUTATION.md
+| 2026-11-01T04:25Z | A-009 | 1 | pass | — | RETROSPECTIVE.md; 9 lessons; GATE-G-003.md reconstructed; D-036 CI build step + DEVIATIONS §9
+| 2026-11-01T04:31Z | A-010 | 1 | pass | — | 25 knowledge items from claims.json; PRIOR_KNOWLEDGE.md; halt at G-004 (GATE-G-004.md, awaiting human)
