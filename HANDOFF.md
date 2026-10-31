@@ -21,3 +21,33 @@
 **Deployment.** Only after G-002 `proceed`; runbook, monitoring and rollback in plan/OPERATIONS.md.
 
 **Credentials.** Use your own GitHub credentials (scopes: contents, workflows, pages, administration for environments). No token is stored in this repository.
+
+---
+
+# Addendum (2026-11-01) — protocol v3.2–v3.6 retroactive application
+
+**Status: ADDENDUM APPLIED.** The base plan above was written against planning-protocol **v3.1**;
+`plan/ADDENDUM.md` retro-applies the machinery added through **v3.6** (lessons, knowledge items,
+checkpointing, §4.7 assumption audit, §3.8 reviews, Rule 14 honest verification, ephemeral
+protections). New artifacts: `EXECUTION_LOG.md`, `RETROSPECTIVE.md`, `lessons/` (9), `knowledge/`
+(25), `reviews/` (3), `premortem/ASSUMPTION_AUDIT.md`, `research/PRIOR_KNOWLEDGE.md`,
+reconstructed `GATE-G-003.md`, `GATE-G-004.md` (lessons/knowledge push — **awaiting human**).
+Workflow amendments D-034/D-036 are logged in `DEVIATIONS.md` §7/§9.
+
+**Rule 6 (Everything Is Committed + push cadence, verbatim intent).** After every successful chunk,
+commit and push immediately, verify with `ls-remote`, retry transient failures with backoff, and
+report mismatches. In environments without push access (as this addendum's), commit per chunk and
+produce `git bundle` as the fallback (§3.7.2(3)/§5.3).
+
+**Rule 11 (Lessons).** Every correction to execution is recorded as one classified file in
+`lessons/L-*.md` (Appendix A template) before work continues.
+
+**Rule 12 (Knowledge).** Every fact discovered about the Subject becomes `knowledge/K-*.md`
+(Appendix B template), `derived_from` its claim ID.
+
+**Rule 13 (Knowledge store).** Lessons and knowledge persist in `qualitycoding/knowledge`;
+research starts by loading relevant entries (R0) — see `research/PRIOR_KNOWLEDGE.md` for this
+project's store history (the store postdates the base plan).
+
+**Execution log.** `EXECUTION_LOG.md` — one line per step attempt (retro digest + live addendum).
+While halted at a gate, independent steps may continue (3.3).

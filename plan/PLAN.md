@@ -1,5 +1,9 @@
 # Plan
 
+> **Addendum 2026-11-01 (protocol v3.6 era):** this plan was written against planning-protocol v3.1.
+> `plan/ADDENDUM.md` retro-applies the v3.2–v3.6 additions and is part of this plan: steps A-001..A-011
+> (all complete except the human response to gate G-004). Status facts below describe the base plan.
+
 **Status: READY** — profiles: `software` (`software.deploys = true`) · branch `gen-20260926T113449Z-audio-to-midi`
 
 | Metric | Count |

@@ -1,19 +1,72 @@
 {
  "run_id": "addendum-20261101T033000Z-audio-to-midi",
  "branch": "main (addendum working copy; origin push unavailable, see A-042)",
- "sequence": 3,
- "profiles": ["software"],
- "mode_flags": {"software.deploys": true},
- "phase": "addendum",
- "subphase": "A-001",
- "active_step_id": "A-001",
+ "sequence": 11,
+ "profiles": [
+  "software"
+ ],
+ "mode_flags": {
+  "software.deploys": true
+ },
+ "phase": "addendum-complete",
+ "subphase": "A-011",
+ "active_step_id": "A-011",
  "research_round": 3,
  "exploration_round": 0,
  "proof_review_round": 0,
  "premortem_round": 2,
- "completed": ["0.1", "0.2", "0.3", "1.1", "1.2", "1.3", "1.4", "2B", "2E", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "4", "5.1", "5.2", "5.3", "5.4", "implementation S-001..S-017 (2026-09)", "G-002 (2026-09-27)", "G-003 (2026-09-27, response evidenced in perf/results)"],
- "pending": ["A-002", "A-003", "A-004", "A-005", "A-006", "A-007", "A-008", "A-009", "A-010", "A-011"],
- "not_applicable": ["0.3.3", "0.3.4", "0.3.5", "1.3-R2b", "2A", "2B.2", "2B-numerical", "2C", "2D", "G-001", "S-MUTATE (opt-out D-032)"],
+ "completed": [
+  "0.1",
+  "0.2",
+  "0.3",
+  "1.1",
+  "1.2",
+  "1.3",
+  "1.4",
+  "2B",
+  "2E",
+  "3.1",
+  "3.2",
+  "3.3",
+  "3.4",
+  "3.5",
+  "3.6",
+  "4",
+  "5.1",
+  "5.2",
+  "5.3",
+  "5.4",
+  "implementation S-001..S-017 (2026-09)",
+  "G-002 (2026-09-27)",
+  "G-003 (2026-09-27, response evidenced in perf/results)",
+  "A-001",
+  "A-002",
+  "A-003",
+  "A-004",
+  "A-005",
+  "A-006",
+  "A-007",
+  "A-008",
+  "A-009",
+  "A-010",
+  "A-011 (pending bundle + human G-004)"
+ ],
+ "pending": [
+  "G-004 human response (lessons/knowledge push)"
+ ],
+ "not_applicable": [
+  "0.3.3",
+  "0.3.4",
+  "0.3.5",
+  "1.3-R2b",
+  "2A",
+  "2B.2",
+  "2B-numerical",
+  "2C",
+  "2D",
+  "G-001",
+  "S-MUTATE (opt-out D-032)"
+ ],
  "environment_class": {
   "class": "ephemeral",
   "probe_evidence": "2026-11-01, this sandbox: every shell tool call starts a fresh session (no env/cwd persistence); /tmp wiped at sandbox release; /mnt/agents is the only durable mount; background processes do not outlive their call. Matches the protocol observed-class table 'Kimi on cloud = ephemeral'.",
@@ -24,30 +77,130 @@
   "evidence": "git clone/ls-remote to github.com fails (TLS connect error); no credential in sandbox. A-042: Rule 6 cadence = commit per chunk + git bundle fallback at A-011."
  },
  "artifacts": {
-  "plan/ADDENDUM.md": "pending-hash-at-A-011"
+  "plan/ADDENDUM.md": "95523915f438d0327aa88d686a3223d261bd547d9fec48b3c757aea8e260e18b",
+  "EXECUTION_LOG.md": "b30a73afa8a84984e92549e1402917b0e0951152f8473a26e8b1545aa112d1cd",
+  "RETROSPECTIVE.md": "91c56445f1d6f0c232f3357a931de3fd8ce76ee8c3d324e660b17cad0e7d9708",
+  "GATE-G-003.md": "117939fb1325d312f0ddbd7bb597a72f63b0e3104a4e3954b3bc6a5411321f82",
+  "GATE-G-004.md": "3f37a4c743d9acc05e27567af696fdc3c9cfa360c359618cac1f9077e9790f2d",
+  "premortem/ASSUMPTION_AUDIT.md": "4ca174840943678900ef5116e41f68d863f6b75bb6fa60efda3d646f8bf7330e",
+  "reviews/CODE_REVIEW.md": "9d9947fd8fa5d5a6830e04910025fefa2060178b95894100e0dbc9a1bd7e8535",
+  "reviews/ADVERSARIAL_REVIEW.md": "7d1bda5d0bfbb427a35688a5447d1f225792629c657741581e71419bceddd524",
+  "reviews/MUTATION.md": "b1c6c185a29e76b5afbe5289b90ed14cc624e95af9a54329c660b9d9bfd9f3de",
+  "research/PRIOR_KNOWLEDGE.md": "af33af1ec05bd20b9b17e3cbef8040874efe613d63498bfd8ce1ad3190143cd8",
+  "research/spikes/pin-verification-20261101.md": "598c96a7044c4d02257a5f9bc7573fae912b509554278283b687a5568ad49a85",
+  "research/spikes/adversarial-probe.spec.ts": "78a786235053106274907570e473b1a41df5339f0cf3fd1a63765d946dbc10f6",
+  "HANDOFF.md": "8de3f9e3247ea2f7f294b8ab3670ecd78dafac5c4a579e70eeffd7dbf7e672db",
+  "plan/DECISIONS.md": "49b031e2360dec0c456238fdaa6928bdddaadc7e8ed0fdf90f14ccad51ab317f",
+  "plan/ENVIRONMENT.md": "a618a85f5f481e91f26a47cc9fb5e66b663e77681dd4ad0f5bed46644bf6585f",
+  "plan/PLAN.md": "dc53ec44ff9a8c2260343b3dfe8f167345f5f2f97de5ecef72943eb5189e6a57",
+  "DEVIATIONS.md": "769199675c9b4c2f391b9dbdc42dde350f0c83df574dc9a6f6e060b4813c4d41",
+  "premortem/RISK_REGISTER.md": "96521ffa79425aeaf43be67030830915426a9a35c8aad4f65073e2d74bdfd83d",
+  ".github/workflows/ci.yml": "0937477740c94d28d13eaf1a5302a76113ff3eb7bf136ed257b85023a02e008a",
+  ".github/workflows/deploy.yml": "85826e167776732963e163fbb635b671ba71e068d50299dc82b27d81650cfeaf"
  },
  "execution_context": {
   "current_objective": "Retroactively apply planning-protocol v3.2-v3.6 additions to the completed audio-to-midi v0.1.0 repo (plan written against v3.1).",
-  "call_stack": ["addendum run", "A-001"],
-  "step_pointer": {"phase": "addendum", "subphase": "A-001", "item_index": 3, "sub_action": "write state.json + EXECUTION_LOG.md", "retry_count": 0},
-  "scratchpad": "Baseline: repo imported as commit 'import: qualitycoding/audio-to-midi @ v0.1.0 (e5e93df) as received'. Plan/ADDENDUM.md committed as 'addendum: plan + register'. npm registry + nodejs.org + codeload reachable; github.com git+TLS blocked; no root (xmllint not installable).",
+  "call_stack": [
+   "addendum run",
+   "A-001"
+  ],
+  "step_pointer": {
+   "phase": "addendum",
+   "subphase": "A-011",
+   "item_index": 11,
+   "sub_action": "final consistency check + bundle",
+   "retry_count": 0
+  },
+  "scratchpad": "All A-steps green. Schema check exit 0. Unit 87/88 (xmllint env-blocked, CI named), accuracy 3/3, freeze OK, src untouched. prod-smoke amended (D-034), CI builds bundle per PR (D-036). Bundle fallback next.",
   "in_flight_operation": null,
   "tool_cache": {}
  },
  "active_variables": {
-  "intake_parameters": {"task": "protocol addendum", "subject_tags": ["domain:audio", "tech:typescript", "tech:vite", "tech:tensorflow-js", "tech:playwright", "tech:github-actions", "tech:github-pages"]},
-  "user_constraints": ["review against updated qualitycoding planning protocol", "addendum plan of added steps", "implement the plan"],
-  "open_questions": ["R-023 play-start latency fix: accept or unfreeze perf.spec.ts (human decision)"],
-  "resolved_questions": ["protocol baseline = v3.1 (heading + section-number match); current = v3.6"],
-  "candidate_decisions": ["D-032 mutation opt-out", "D-033 G-004 numbering", "D-034 prod-smoke amendment", "D-035 tier substitution"],
+  "intake_parameters": {
+   "task": "protocol addendum",
+   "subject_tags": [
+    "domain:audio",
+    "tech:typescript",
+    "tech:vite",
+    "tech:tensorflow-js",
+    "tech:playwright",
+    "tech:github-actions",
+    "tech:github-pages"
+   ]
+  },
+  "user_constraints": [
+   "review against updated qualitycoding planning protocol",
+   "addendum plan of added steps",
+   "implement the plan"
+  ],
+  "open_questions": [
+   "R-023 play-start latency fix: accept or unfreeze perf.spec.ts (human decision)"
+  ],
+  "resolved_questions": [
+   "protocol baseline = v3.1 (heading + section-number match); current = v3.6"
+  ],
+  "candidate_decisions": [
+   "D-032 mutation opt-out",
+   "D-033 G-004 numbering",
+   "D-034 prod-smoke amendment",
+   "D-035 tier substitution"
+  ],
   "uncommitted_drafts": {},
   "variable_store": {}
  },
- "tier_substitutions": [{"original": "Fable/Opus/Sonnet/Haiku multi-agent", "substituted": "single planning-grade agent, same context", "reason": "no subagent spawning in this environment; precedent D-031", "logged_as": "D-035"}],
+ "tier_substitutions": [
+  {
+   "original": "Fable/Opus/Sonnet/Haiku multi-agent",
+   "substituted": "single planning-grade agent, same context",
+   "reason": "no subagent spawning in this environment; precedent D-031",
+   "logged_as": "D-035"
+  }
+ ],
  "open_items": [],
- "knowledge_store": {"location": "qualitycoding/knowledge (default per A-043; protocol-corrected default)", "commit_read": null, "readable": false, "note": "store access check 0.3.7: not readable from this sandbox (github.com blocked); store postdates the original plan. Recorded, not blocking (0.3.7)."},
+ "knowledge_store": {
+  "location": "qualitycoding/knowledge (default per A-043; protocol-corrected default)",
+  "commit_read": null,
+  "readable": false,
+  "note": "store access check 0.3.7: not readable from this sandbox (github.com blocked); store postdates the original plan. Recorded, not blocking (0.3.7)."
+ },
  "lessons_loaded": [],
- "lessons_recorded": [],
- "knowledge_added": [],
- "updated_at": "2026-11-01T03:35:00Z"
+ "lessons_recorded": [
+  "L-20261101T041500Z-verify-worker-bundle-before-freezing-architecture",
+  "L-20261101T041600Z-vitest-and-tsc-pass-on-bundler-only-errors",
+  "L-20261101T041700Z-headless-firefox-web-audio-clock",
+  "L-20261101T041800Z-perf-harness-must-exercise-what-it-reports",
+  "L-20261101T041900Z-log-every-substitution-in-the-commit-it-happens",
+  "L-20261101T042000Z-commit-gate-records-with-the-response",
+  "L-20261101T042100Z-github-git-flaky-use-codeload-tarball",
+  "L-20261101T042200Z-portal-mount-no-symlinks-or-exec-bits",
+  "L-20261101T042300Z-probe-knowledge-store-dont-adopt-defaults"
+ ],
+ "knowledge_added": [
+  "K-20261101T043000Z-basic-pitch-default-thresholds",
+  "K-20261101T043000Z-basic-pitch-evaluatemodel-api",
+  "K-20261101T043000Z-basic-pitch-held-out-f1",
+  "K-20261101T043000Z-basic-pitch-model-files",
+  "K-20261101T043000Z-basic-pitch-node-buffer",
+  "K-20261101T043000Z-basic-pitch-package",
+  "K-20261101T043000Z-basic-pitch-pitch-range",
+  "K-20261101T043000Z-github-pages-no-custom-headers",
+  "K-20261101T043000Z-musicxml-string-numbering",
+  "K-20261101T043000Z-musicxml-tab-encoding",
+  "K-20261101T043000Z-musicxml-xsd-remote-imports",
+  "K-20261101T043000Z-npm-audit-clean-pins",
+  "K-20261101T043000Z-pitchy-mpl-tracking",
+  "K-20261101T043000Z-playwright-cpu-throttling-cdp",
+  "K-20261101T043000Z-playwright-mobile-devices",
+  "K-20261101T043000Z-playwright-webkit-not-safari",
+  "K-20261101T043000Z-safari-decodeaudiodata-callback",
+  "K-20261101T043000Z-synthetic-fixture-accuracy-limit",
+  "K-20261101T043000Z-tfjs-cpu-realtime-factor",
+  "K-20261101T043000Z-tfjs-wasm-fill-dtype-bug",
+  "K-20261101T043000Z-tfjs-webgl-float16-mobile",
+  "K-20261101T043000Z-tonal-chord-detect",
+  "K-20261101T043000Z-tonejs-midi-smf",
+  "K-20261101T043000Z-twelve-tet-formula",
+  "K-20261101T043000Z-vite-vitest-node-peers"
+ ],
+ "updated_at": "2026-11-01T04:40:00Z"
 }

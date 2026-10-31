@@ -30,3 +30,4 @@ a lesson, see lessons/)
 | 2026-11-01T04:14Z | A-008 | 1 | pass | — | S-MUTATE opt-out D-032; reviews/MUTATION.md
 | 2026-11-01T04:25Z | A-009 | 1 | pass | — | RETROSPECTIVE.md; 9 lessons; GATE-G-003.md reconstructed; D-036 CI build step + DEVIATIONS §9
 | 2026-11-01T04:31Z | A-010 | 1 | pass | — | 25 knowledge items from claims.json; PRIOR_KNOWLEDGE.md; halt at G-004 (GATE-G-004.md, awaiting human)
+| 2026-11-01T04:41Z | A-011 | 1 | pass | — | schema check exit 0 (9 L + 25 K); unit 87/88 + accuracy 3/3 re-run (xmllint env-blocked, CI named); freeze OK; HANDOFF/PLAN updated; bundle fallback executed
