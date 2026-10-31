@@ -24,3 +24,4 @@ a lesson, see lessons/)
 | 2026-11-01T03:31Z | addendum plan | 1 | pass | — | plan/ADDENDUM.md + A-041..A-044, D-032..D-035, new risks |
 | 2026-11-01T03:35Z | A-001 | 1 | pass | a4c4beb | env class=ephemeral; push unavailable→bundle fallback; state.json upgraded to v3.6 schema |
 | 2026-11-01T03:52Z | A-004 | 1 | pass | — | deviation completeness: jsdom/smoke-dom logged as DEVIATIONS §8; R-025 added
+| 2026-11-01T04:00Z | A-005 | 1 | pass | — | assumption audit: 20 confirmed, 3 falsified-in-part (tracked), 2 unverifiable; R-023/027/028/029
