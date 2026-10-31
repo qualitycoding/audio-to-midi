@@ -71,3 +71,9 @@ Unit/accuracy fixtures are synthesized in-test (`tests/fixtures/synth.ts`); E2E 
 
 ## D-031 Process deviation (tier fallback, Global Rule 5)
 Subagent spawning is unavailable in the planning environment. All tiers (Fable/Opus/Sonnet/Haiku roles) were performed by the single planning agent; "fresh-context" cold-read (3.6) and pre-mortem (Phase 4) were therefore performed in the same context. Mechanical (Haiku-role) checks were scripted (`research/spikes/check_plan.py`) to reduce self-review bias. Recorded as R-022 and in `.checkpoints/state.json` `tier_substitutions`.
+
+## Addendum decisions (2026-11-01, `plan/ADDENDUM.md` — protocol v3.2–v3.6 retroactive application)
+- **D-032** `S-MUTATE` opt-out: no mutation run; rationale and revisit trigger in `reviews/MUTATION.md`.
+- **D-033** Gate-numbering collision: this plan froze G-003 = real-device figures (A-020) before protocol v3.2 redefined G-003 = lessons/knowledge push. The addendum's knowledge-push gate is numbered **G-004**; protocol semantic preserved.
+- **D-034** Scoped amendment (2E.4): `prod-smoke` job could not fail (`smoke.sh || gh issue create`) — amended to create the issue **and** `exit 1`, in `.github/workflows/ci.yml` + template `plan/workflows/ci.yml` (diff-identical). Logged as DEVIATIONS §7.
+- **D-035** Tier substitution for the addendum run: all A-step reviews/audits by the single planning-grade agent in one context; mechanical checks (Appendix C schema check, Rule-14 idiom scan) scripted per the D-031 precedent.
