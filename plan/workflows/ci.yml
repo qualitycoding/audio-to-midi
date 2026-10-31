@@ -84,5 +84,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests/deploy/smoke.sh https://qualitycoding.github.io/audio-to-midi/ || gh issue create --title "Production smoke failed $(date -u +%F)" --body "See run $GITHUB_RUN_ID"
+      - name: Production smoke (scheduled)
+        run: |
+          tests/deploy/smoke.sh https://qualitycoding.github.io/audio-to-midi/ || {
+            gh issue create --title "Production smoke failed $(date -u +%F)" --body "See run $GITHUB_RUN_ID"
+            exit 1   # Rule 14: a check that cannot fail is not a check — alert AND go red
+          }
         env: { GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }

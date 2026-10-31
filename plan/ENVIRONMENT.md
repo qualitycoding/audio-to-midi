@@ -21,3 +21,11 @@ npx playwright install --with-deps chromium firefox webkit   # CI / dev machine 
 npm run test:e2e
 ```
 Verified here: `npm ci`, `npx tsc --noEmit`, `npm run build`, `npm test` (red, clean), `npm run fixtures`, `npm run verify:freeze`.
+
+## Addendum verification (2026-11-01, protocol §1.3.6 retroactive)
+All pins in the table above plus every D-002 dependency looked up against their registries —
+**all exist** (lookup evidence: `research/spikes/pin-verification-20261101.md`). Two follow-up
+notes: `jsdom ^27.4.0` is the only caret-pinned dependency (finding, see reviews/CODE_REVIEW.md);
+`actions/upload-pages-artifact@v3` has a newer major v5 (risk R-026). `xmllint` and Playwright
+browsers are not installable in the addendum sandbox — environment-blocked, CI equivalents named
+in the spike file (§1.5(6) honest recording, not passes).

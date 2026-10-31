@@ -77,3 +77,23 @@ therefore have a `playStartLatencyMs` of 0 that is not a real measurement. I did
 frozen spec to fix this — noted in `perf/MOBILE.md` as a disclosed gap (Rule 9) for the plan owner
 to decide whether to accept, or unfreeze/extend `perf.spec.ts` to actually exercise `play` before
 calling `bench()`.
+
+
+## 7. `prod-smoke` job could not fail (workflow substitution, addendum D-034)
+**What:** `ci.yml`'s scheduled `prod-smoke` step ran `smoke.sh … || gh issue create …`, so a failed
+smoke still left the job green — a check that cannot fail, forbidden by protocol Rule 14 (v3.5).
+**Fix (addendum A-003, scoped amendment per 2E.4):** the step now creates the issue **and**
+`exit 1`s, applied identically to `.github/workflows/ci.yml` and its template
+`plan/workflows/ci.yml` (verified identical by diff). R-019's alert intent is preserved.
+**Frozen files touched:** none (workflows are not in `tests/FROZEN_MANIFEST.sha256`).
+**Consequence:** a failing scheduled smoke now opens an issue *and* shows red in the Actions list.
+
+## 8. `jsdom` devDependency + `scripts/smoke-dom.mjs` added without a deviation entry (addendum A-004)
+**What:** during implementation the ad-hoc jsdom DOM-smoke probe was attempted and abandoned
+(§2) — but its dependency (`jsdom ^27.4.0`, the repo's only caret pin) and its script
+(`scripts/smoke-dom.mjs`) stayed in the tree, and the substitution was never logged here.
+**Why it matters:** Rule 14 (v3.5) treats every substitution as a deviation logged when made;
+3.7.1-Q1a caught this by diffing `package.json` against D-002/ENVIRONMENT.md.
+**Disposition:** dead code + unaudited devDependency; removal proposed in
+`reviews/CODE_REVIEW.md` (A-006), carried as accepted-with-follow-up risk R-025 — not silently
+deleted in this pass because removal is a scope decision for the maintainer.

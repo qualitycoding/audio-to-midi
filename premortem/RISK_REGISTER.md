@@ -19,3 +19,5 @@
 | R-020 | Rerun-until-green on perf | integrity | Medium | low | flaky threshold temptation | Rule 9 | artifacts per run; DR-05 |
 | R-021 | Test-hook shape drift | misinterpretation | Low | low | contract ambiguity | D-025 | typed HookState |
 | R-022 | Pre-mortem and cold-read not performed by fresh-context agents | process | Medium | — | no subagent capability | D-031 | mechanical checks scripted; human review at G-002 |
+| R-023 | SC-13 "play start < 100 ms" unverified: frozen perf harness never clicks play, so `playStartLatencyMs` is always 0 | verification-gap | **High — human decision** | certain (as shipped) | frozen test coverage gap | DEVIATIONS §6, A-015 | options: (a) accept + document, (b) TEST_CHALLENGE → amend `tests/e2e/perf.spec.ts` (click play before bench), red-verify, re-freeze. Surfaced by addendum A-003; frozen file untouched |
+| R-024 | Scheduled prod-smoke could not fail the job (`|| gh issue create`) | verification-gap | Medium → **closed 2026-11-01** | certain (as shipped) | alert swallowed the red | D-034 | fixed by addendum A-003 (issue + `exit 1`) |
