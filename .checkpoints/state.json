@@ -9,8 +9,8 @@
   "software.deploys": true
  },
  "phase": "addendum-complete",
- "subphase": "G-004-executed",
- "active_step_id": "G-004",
+ "subphase": "R-023-closed",
+ "active_step_id": "D-037",
  "research_round": 3,
  "exploration_round": 0,
  "proof_review_round": 0,
@@ -50,11 +50,10 @@
   "A-009",
   "A-010",
   "A-011 (pending bundle + human G-004)",
-  "G-004 (2026-11-01, response push-to-proposed executed)"
+  "G-004 (2026-11-01, response push-to-proposed executed)",
+  "D-037 (R-023 option b: perf.spec.ts unfreeze-and-extend, re-frozen)"
  ],
- "pending": [
-  "R-023 human decision (accept play-start latency gap or unfreeze perf.spec.ts via Phase-2 machinery)"
- ],
+ "pending": [],
  "not_applicable": [
   "0.3.3",
   "0.3.4",
@@ -79,7 +78,7 @@
  },
  "artifacts": {
   "plan/ADDENDUM.md": "95523915f438d0327aa88d686a3223d261bd547d9fec48b3c757aea8e260e18b",
-  "EXECUTION_LOG.md": "71d04aceb9465188ff6893e718bd1d5db2fdd87a3eec006e0db365aaafd55290",
+  "EXECUTION_LOG.md": "5ca6fc041652e0cf13f860cf667edeba7c263932502033f2ba5bf272c9da05ae",
   "RETROSPECTIVE.md": "91c56445f1d6f0c232f3357a931de3fd8ce76ee8c3d324e660b17cad0e7d9708",
   "GATE-G-003.md": "117939fb1325d312f0ddbd7bb597a72f63b0e3104a4e3954b3bc6a5411321f82",
   "GATE-G-004.md": "a5afaff1b473c32003dd2eb699c285bd987650490caec70ff268daa30fcbbcc0",
@@ -91,13 +90,15 @@
   "research/spikes/pin-verification-20261101.md": "598c96a7044c4d02257a5f9bc7573fae912b509554278283b687a5568ad49a85",
   "research/spikes/adversarial-probe.spec.ts": "78a786235053106274907570e473b1a41df5339f0cf3fd1a63765d946dbc10f6",
   "HANDOFF.md": "cafad467b017ef38df60bf7afa2fcda22e64b63f521c1c0452eedb9998cfccfa",
-  "plan/DECISIONS.md": "49b031e2360dec0c456238fdaa6928bdddaadc7e8ed0fdf90f14ccad51ab317f",
+  "plan/DECISIONS.md": "6f61de9b1756a0ee629210949cb2f4be1919119cf261f4c99fd9b0e333ae4d9b",
   "plan/ENVIRONMENT.md": "a618a85f5f481e91f26a47cc9fb5e66b663e77681dd4ad0f5bed46644bf6585f",
   "plan/PLAN.md": "dc53ec44ff9a8c2260343b3dfe8f167345f5f2f97de5ecef72943eb5189e6a57",
-  "DEVIATIONS.md": "08cd41981136ecdb62ac747b1e74af8e826ea90d119e98123bc94b11dc64b283",
-  "premortem/RISK_REGISTER.md": "96521ffa79425aeaf43be67030830915426a9a35c8aad4f65073e2d74bdfd83d",
+  "DEVIATIONS.md": "b7b34c02d2cc386a8d4f7eb639b0a6bd7654ad21b9270fb5f74c415f631c90f2",
+  "premortem/RISK_REGISTER.md": "d5372beaf9139b68491a34854096159c01a90c88f27357739e0f233b0e654358",
   ".github/workflows/ci.yml": "0937477740c94d28d13eaf1a5302a76113ff3eb7bf136ed257b85023a02e008a",
-  ".github/workflows/deploy.yml": "85826e167776732963e163fbb635b671ba71e068d50299dc82b27d81650cfeaf"
+  ".github/workflows/deploy.yml": "85826e167776732963e163fbb635b671ba71e068d50299dc82b27d81650cfeaf",
+  "tests/FROZEN_MANIFEST.sha256": "3efdd4426a83a69b16265239f6a8c58272110be8ec41f3fa8cf3cd891ab31664",
+  "tests/e2e/perf.spec.ts": "975279361745e0d008ede01d79c593ffaed285e5e14b64ed4e97c6b42282f484"
  },
  "execution_context": {
   "current_objective": "Retroactively apply planning-protocol v3.2-v3.6 additions to the completed audio-to-midi v0.1.0 repo (plan written against v3.1).",
@@ -134,17 +135,17 @@
    "addendum plan of added steps",
    "implement the plan"
   ],
-  "open_questions": [
-   "R-023 play-start latency fix: accept or unfreeze perf.spec.ts (human decision)"
-  ],
+  "open_questions": [],
   "resolved_questions": [
-   "protocol baseline = v3.1 (heading + section-number match); current = v3.6"
+   "protocol baseline = v3.1 (heading + section-number match); current = v3.6",
+   "R-023 play-start latency: human approved option (b) unfreeze-and-extend 2026-11-01"
   ],
   "candidate_decisions": [
    "D-032 mutation opt-out",
    "D-033 G-004 numbering",
    "D-034 prod-smoke amendment",
-   "D-035 tier substitution"
+   "D-035 tier substitution",
+   "D-037 perf.spec.ts amendment (TEST_CHALLENGE, re-frozen)"
   ],
   "uncommitted_drafts": {},
   "variable_store": {}
@@ -203,5 +204,5 @@
   "K-20261101T043000Z-twelve-tet-formula",
   "K-20261101T043000Z-vite-vitest-node-peers"
  ],
- "updated_at": "2026-11-01T05:10:00Z"
+ "updated_at": "2026-11-01T05:35:00Z"
 }

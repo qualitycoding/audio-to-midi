@@ -127,3 +127,23 @@ the earlier run already curated. The plan's single-target assumption is correcte
 future run.
 **Disposition:** recorded in GATE-G-004.md "Executed"; residual human decisions unchanged
 (R-023; R-025 dead-code removal).
+
+
+## 11. Frozen `tests/e2e/perf.spec.ts` amended by human approval (R-023 option (b), D-037, 2026-11-01)
+**What:** the human approved the unfreeze-and-extend: `TEST_CHALLENGE.md` written (DR-10); the
+frozen perf spec now clicks play, polls `state().player.startLatencyMs` until non-null, stops,
+and only then benches — so `playStartLatencyMs` is measured, not the `?? 0` fallback. Desktop
+gains `expect(r.playStartLatencyMs).toBeGreaterThan(0)` before the existing `< 100` SC-13 gate.
+**Why it matters:** without this, every PerfReport ever recorded (desktop, mobile, real device)
+carried `playStartLatencyMs: 0` and the SC-13 budget had no evidence (base-run DEVIATIONS §6;
+lesson L-20261009T151801Z).
+**Scope discipline:** no threshold changed; zoom measurement kept comparable (playback stopped
+before zoom bench); `helpers.ts` and all other frozen files untouched; manifest re-frozen in the
+same commit (`tests/FROZEN_MANIFEST.sha256` entry replaced, all 26 entries verify).
+**Verification:** tsc clean, `npm run build` clean, unit 87/88 (sole failure = T-006 XSD
+subtest, xmllint absent in this sandbox — pre-existing environment block, CI installs
+libxml2-utils), accuracy 3/3. The e2e perf run itself is environment-blocked here (no browser
+binaries; A-002 finding) — first real measurement happens on CI, where the amended test gates
+the merge. If a runner's `AudioContext.resume()` hangs, the player's 500 ms race bounds the
+measurement (~550 ms) and the gate fails honestly instead of recording 0.
+**Disposition:** R-023 closed; SC-13 now evidence-backed on every subsequent CI perf run.
