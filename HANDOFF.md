@@ -31,7 +31,9 @@
 checkpointing, §4.7 assumption audit, §3.8 reviews, Rule 14 honest verification, ephemeral
 protections). New artifacts: `EXECUTION_LOG.md`, `RETROSPECTIVE.md`, `lessons/` (9), `knowledge/`
 (25), `reviews/` (3), `premortem/ASSUMPTION_AUDIT.md`, `research/PRIOR_KNOWLEDGE.md`,
-reconstructed `GATE-G-003.md`, `GATE-G-004.md` (lessons/knowledge push — **awaiting human**).
+reconstructed `GATE-G-003.md`, `GATE-G-004.md` (lessons/knowledge push — **executed 2026-11-01** on
+`push-to-proposed`: branch pushed; 9 lessons → `qualitycoding/Lessons` @a01b608, 7 deduped
+knowledge items → `qualitycoding/knowledge` @89da6c7; see GATE-G-004.md "Executed" + DEVIATIONS §10).
 Workflow amendments D-034/D-036 are logged in `DEVIATIONS.md` §7/§9.
 
 **Rule 6 (Everything Is Committed + push cadence, verbatim intent).** After every successful chunk,

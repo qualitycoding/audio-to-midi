@@ -106,3 +106,24 @@ ESM-default-export breakage (§5) was only caught because the implementer happen
 production build; Vitest and `tsc` both pass on that error class. **Consequence:** PR CI takes a
 bit longer; bundler-only regressions now fail PRs. Logged per Rule 14 (substitutions are
 deviations). No frozen file touched.
+
+
+## 10. G-004 executed as a two-store push with dedupe, not the plan's single-store copy (gate response `push-to-proposed`, 2026-11-01)
+**What:** the plan (A-043, GATE-G-004.md "Request") assumed one target — `qualitycoding/knowledge`
+— and a straight copy of all 9 lessons + 25 knowledge items. At execution the store was probed
+first: `qualitycoding/knowledge` already holds a curated 2026-10-09 set from this same project,
+its README/scripts define the split layout (lessons in companion repo `qualitycoding/Lessons`,
+folders `<facet>-<value>` with colon→hyphen), and 18 of the 25 generated K-items restate facts
+already curated there.
+**What was actually done:** lessons (9) pushed to `qualitycoding/Lessons` @ `a01b608` — four
+filed as `recurrence_of` links to existing lessons instead of new duplicates; knowledge pushed
+to `qualitycoding/knowledge` @ `89da6c7` — 7 new items only, 18 generated items withheld as
+duplicates of the curated set; three new subjects + two new tech tags added to the store
+taxonomies in the same commits; `tech:tensorflow-js`/`tech:npm` remapped to the stores'
+existing `tech:tfjs`/`tech:nodejs`.
+**Why it matters:** Rule 12 (never edit away) is satisfied — the 25 generated items stay in this
+branch's `knowledge/` as evidence — while the shared stores are not polluted with restatements
+the earlier run already curated. The plan's single-target assumption is corrected for any
+future run.
+**Disposition:** recorded in GATE-G-004.md "Executed"; residual human decisions unchanged
+(R-023; R-025 dead-code removal).

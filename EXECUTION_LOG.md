@@ -30,4 +30,9 @@ a lesson, see lessons/)
 | 2026-11-01T04:14Z | A-008 | 1 | pass | — | S-MUTATE opt-out D-032; reviews/MUTATION.md
 | 2026-11-01T04:25Z | A-009 | 1 | pass | — | RETROSPECTIVE.md; 9 lessons; GATE-G-003.md reconstructed; D-036 CI build step + DEVIATIONS §9
 | 2026-11-01T04:31Z | A-010 | 1 | pass | — | 25 knowledge items from claims.json; PRIOR_KNOWLEDGE.md; halt at G-004 (GATE-G-004.md, awaiting human)
-| 2026-11-01T04:41Z | A-011 | 1 | pass | — | schema check exit 0 (9 L + 25 K); unit 87/88 + accuracy 3/3 re-run (xmllint env-blocked, CI named); freeze OK; HANDOFF/PLAN updated; bundle fallback executed
+| 2026-11-01T04:41Z | A-011 | 1 | pass | — | schema check exit 0 (9 L + 25 K); unit 87/88 + accuracy 3/3 re-run (xmllint env-blocked, CI named); freeze OK; HANDOFF/PLAN updated; bundle fallback executed |
+| 2026-11-01T04:55Z | G-004 response | 1 | pass | — | human answered `push-to-proposed` with one-time PAT; PAT used for the pushes only, stored nowhere (post-push secret scan clean) |
+| 2026-11-01T04:56Z | G-004 push: branch | 1 | pass | — | `addendum-20261101T033000Z-protocol-v3.6` pushed to qualitycoding/audio-to-midi @0aef1f9; ls-remote verified; `main` (deployed v0.1.0) untouched |
+| 2026-11-01T04:58Z | G-004 store probe | 1 | pass | — | store @d07959e fetched (tarball matched, zero drift); README/scripts: lessons→companion repo `qualitycoding/Lessons`, knowledge→`qualitycoding/knowledge`; existing 2026-10-09 curated set from this project found → dedupe before push |
+| 2026-11-01T05:00Z | G-004 push: Lessons | 1 | pass | — | 9 lessons filed (4 as recurrences with recurrence_of; occurrences 2/2/2/3); tech:web-workers + tech:firefox added to store taxonomy same commit; schema+index OK; pushed @a01b608; ls-remote verified |
+| 2026-11-01T05:03Z | G-004 push: knowledge | 2 | pass | — | 18/25 generated K-items dropped as already-curated duplicates; 7 new filed (3 new subjects; tfjs/nodejs tag remap to store vocabulary); schema+index OK; attempt 1 transport timeout, attempt 2 @89da6c7; ls-remote verified; DEVIATIONS §10 |
