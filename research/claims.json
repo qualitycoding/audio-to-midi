@@ -1,0 +1,705 @@
+[
+ {
+  "id": "C-001",
+  "claim": "@spotify/basic-pitch 1.0.1 is Apache-2.0 and depends on @tensorflow/tfjs ^3.2.0 (resolves 3.21.0) and @tonejs/midi ^2.0.28.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://registry.npmjs.org/@spotify/basic-pitch",
+    "doi": "",
+    "title": "npm registry: @spotify/basic-pitch",
+    "version": "1.0.1",
+    "locator": "npm view @spotify/basic-pitch@1.0.1",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://github.com/spotify/basic-pitch-ts",
+    "doi": "",
+    "title": "basic-pitch-ts source (npm tarball)",
+    "version": "1.0.1",
+    "locator": "package.json; LICENSE",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-002",
+   "A-004"
+  ]
+ },
+ {
+  "id": "C-002",
+  "claim": "The npm package ships the TF.js graph model (model/model.json + group1-shard1of1.bin, ~904 KB).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://github.com/spotify/basic-pitch-ts",
+    "doi": "",
+    "title": "basic-pitch-ts source (npm tarball)",
+    "version": "1.0.1",
+    "locator": "model/",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-004"
+  ]
+ },
+ {
+  "id": "C-003",
+  "claim": "basic-pitch generateFileData() returns a Node Buffer, so it is unsuitable in the browser.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://github.com/spotify/basic-pitch-ts",
+    "doi": "",
+    "title": "basic-pitch-ts source (npm tarball)",
+    "version": "1.0.1",
+    "locator": "src/toMidi.ts:601-622",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-003"
+  ]
+ },
+ {
+  "id": "C-004",
+  "claim": "basic-pitch covers MIDI 21..108 (A0 27.5 Hz base, 88 semitones) at 22050 Hz mono input; notes below A0 (e.g. F#0 of the 7-string bass) cannot be detected.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://github.com/spotify/basic-pitch-ts",
+    "doi": "",
+    "title": "basic-pitch-ts source (npm tarball)",
+    "version": "1.0.1",
+    "locator": "src/toMidi.ts:36-49",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "research/spikes/bp_spike.mjs",
+    "doi": "",
+    "title": "spike bp_spike.mjs",
+    "version": "",
+    "locator": "low-bass run: F1 0.2",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-021",
+   "T-012",
+   "A-008"
+  ]
+ },
+ {
+  "id": "C-005",
+  "claim": "BasicPitch.evaluateModel(Float32Array|AudioBuffer, onComplete(frames,onsets,contours), percentCallback) at 22050 Hz; outputToNotesPoly(frames,onsets,onsetThresh,frameThresh,minNoteLen).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://github.com/spotify/basic-pitch-ts",
+    "doi": "",
+    "title": "basic-pitch-ts source (npm tarball)",
+    "version": "1.0.1",
+    "locator": "src/inference.ts:160-185; src/toMidi.ts:342-353",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-022",
+   "DR-02"
+  ]
+ },
+ {
+  "id": "C-006",
+  "claim": "With default thresholds (0.5/0.3/5) monophonic plucked fixtures yield precision 0.5 because harmonics (+12,+19,+24,+28 semitones) are emitted as notes.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/bp_spike2.mjs",
+    "doi": "",
+    "title": "spike bp_spike2.mjs",
+    "version": "",
+    "locator": "output lines 1,5",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-022"
+  ]
+ },
+ {
+  "id": "C-007",
+  "claim": "Held-out fixtures: mono preset 0.7/0.5/11 F1 0.984; poly preset 0.5/0.3/5 F1 0.896 (6-string chords) and 0.833 (8-string chords). High thresholds hurt poly recall (0.59-0.72).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/bp_spike3.mjs",
+    "doi": "",
+    "title": "spike bp_spike3.mjs",
+    "version": "",
+    "locator": "printed table",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "research/spikes/bp_spike3w.mjs",
+    "doi": "",
+    "title": "spike bp_spike3w.mjs",
+    "version": "",
+    "locator": "wasm parity table",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-022",
+   "T-013",
+   "A-016"
+  ]
+ },
+ {
+  "id": "C-008",
+  "claim": "pitchy (McLeod pitch method) with 4096-sample window at 44.1 kHz resolves synthetic plucks MIDI 18..40 to within ~0.02 semitone.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/mpm_spike.mjs",
+    "doi": "",
+    "title": "spike mpm_spike.mjs",
+    "version": "",
+    "locator": "11/11 correct",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-020",
+   "D-021",
+   "T-011",
+   "T-012"
+  ]
+ },
+ {
+  "id": "C-009",
+  "claim": "@tensorflow/tfjs-backend-wasm 3.21.0 fails on the basic-pitch graph ('Unknown dtype undefined' in Fill); re-registering Fill with dtype defaulting to float32 fixes it with identical accuracy; throughput 7.67x realtime single-thread SIMD on a 2.1 GHz Xeon core.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/wasm_spike.mjs",
+    "doi": "",
+    "title": "spike wasm_spike.mjs",
+    "version": "",
+    "locator": "error + patched run",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "research/spikes/bp_spike3w.mjs",
+    "doi": "",
+    "title": "spike bp_spike3w.mjs",
+    "version": "",
+    "locator": "parity",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-023",
+   "DR-03",
+   "A-015"
+  ]
+ },
+ {
+  "id": "C-010",
+  "claim": "12-TET: f = a4 * 2^((m-69)/12); MIDI 18 = F#0 = 23.1247 Hz at A4=440.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://tonaljs.github.io/tonal/docs",
+    "doi": "",
+    "title": "tonal Note.freq",
+    "version": "6.4.3",
+    "locator": "Note.freq('F#0')",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "research/spikes/misc_spike.mjs",
+    "doi": "",
+    "title": "spike misc_spike.mjs",
+    "version": "",
+    "locator": "freq 23.125",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "T-001"
+  ]
+ },
+ {
+  "id": "C-011",
+  "claim": "tonal 6.4.3 Chord.detect on pitch classes returns e.g. 'AM','Em','Am7','C7','C#M'; Note.fromMidi uses flats (Gb0), Note.fromMidiSharps sharps.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/misc_spike.mjs",
+    "doi": "",
+    "title": "spike misc_spike.mjs",
+    "version": "",
+    "locator": "chord lines",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://registry.npmjs.org/tonal",
+    "doi": "",
+    "title": "npm registry: tonal",
+    "version": "6.4.3",
+    "locator": "npm view tonal@6.4.3",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-012",
+   "T-002"
+  ]
+ },
+ {
+  "id": "C-012",
+  "claim": "@tonejs/midi 2.0.28 writes SMF format 1 (ppq 480, tempo track + one per addTrack), round-trips time signatures, notes (incl. MIDI 18) and tempo quantised to integer us/quarter (97.5 -> 97.5000975).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/misc_spike.mjs",
+    "doi": "",
+    "title": "spike misc_spike.mjs",
+    "version": "",
+    "locator": "SMF line + header hex",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://registry.npmjs.org/@tonejs/midi",
+    "doi": "",
+    "title": "npm registry: @tonejs/midi",
+    "version": "2.0.28",
+    "locator": "npm view @tonejs/midi@2.0.28",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-018",
+   "T-007"
+  ]
+ },
+ {
+  "id": "C-013",
+  "claim": "npm audit reports 0 vulnerabilities for the pinned dependency set (2026-09-26).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://registry.npmjs.org/-/npm/v1/security/advisories/bulk",
+    "doi": "",
+    "title": "npm audit",
+    "version": "",
+    "locator": "npm audit --omit=dev",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "DR-08"
+  ]
+ },
+ {
+  "id": "C-014",
+  "claim": "Safari's decodeAudioData has historically needed the callback form and may call the error callback with null; decode support differs from canPlayType.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://api.dart.dev/dart-web_audio/AudioContext/decodeAudioData.html",
+    "doi": "",
+    "title": "Dart web_audio decodeAudioData notes",
+    "version": "",
+    "locator": "implementation comment",
+    "accessed": "2026-09-26",
+    "tier": 3
+   },
+   {
+    "url": "https://bugs.webkit.org/show_bug.cgi?id=226922",
+    "doi": "",
+    "title": "WebKit bug 226922",
+    "version": "",
+    "locator": "description",
+    "accessed": "2026-09-26",
+    "tier": 2
+   }
+  ],
+  "confidence": "corroborated",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-020..D-023 step 1",
+   "DR-07"
+  ]
+ },
+ {
+  "id": "C-015",
+  "claim": "GitHub Pages cannot set custom headers (COOP/COEP), so SharedArrayBuffer / wasm threads are unavailable.",
+  "kind": "software",
+  "load_bearing": false,
+  "sources": [
+   {
+    "url": "https://github.com/orgs/community/discussions/13309",
+    "doi": "",
+    "title": "GitHub community discussion 13309",
+    "version": "",
+    "locator": "staff reply",
+    "accessed": "2026-09-26",
+    "tier": 2
+   }
+  ],
+  "confidence": "single-source",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-023"
+  ]
+ },
+ {
+  "id": "C-016",
+  "claim": "MusicXML 4.0 encodes tab via <staff-details><staff-lines>, <staff-tuning line=..>, TAB clef, and <technical><string>/<fret>; fret is xs:nonNegativeInteger.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://www.w3.org/2021/06/musicxml40/tutorial/tablature",
+    "doi": "",
+    "title": "W3C MusicXML 4.0 tutorial: Tablature",
+    "version": "4.0",
+    "locator": "Fret and String; String Tuning",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "research/spikes/xsd + tab8.xml",
+    "doi": "",
+    "title": "spike xsd + tab8.xml",
+    "version": "",
+    "locator": "xmllint: validates; -1 rejected",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-017",
+   "T-006"
+  ]
+ },
+ {
+  "id": "C-017",
+  "claim": "MusicXML strings are numbered from 1 = highest; staff-tuning lines are numbered bottom to top.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://www.w3.org/2021/06/musicxml40/tutorial/tablature",
+    "doi": "",
+    "title": "W3C tutorial",
+    "version": "4.0",
+    "locator": "Fret and String",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://w3c.github.io/musicxml/musicxml-reference/elements/staff-tuning",
+    "doi": "",
+    "title": "W3C reference staff-tuning",
+    "version": "4.0",
+    "locator": "line attribute",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "corroborated",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-017",
+   "T-006"
+  ]
+ },
+ {
+  "id": "C-018",
+  "claim": "On mobile, TF.js WebGL may only support 16-bit float textures; WEBGL_RENDER_FLOAT32_CAPABLE indicates 32-bit support.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://www.tensorflow.org/js/guide/platform_environment",
+    "doi": "",
+    "title": "TF.js platform & environment guide",
+    "version": "",
+    "locator": "WebGL backend / precision",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "corroborated",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-023"
+  ]
+ },
+ {
+  "id": "C-019",
+  "claim": "CPU throttling in Playwright is available only through a Chromium CDP session (Emulation.setCPUThrottlingRate, rate = slowdown factor).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://chromedevtools.github.io/devtools-protocol/tot/Emulation/",
+    "doi": "",
+    "title": "CDP Emulation domain",
+    "version": "",
+    "locator": "setCPUThrottlingRate",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://gist.github.com/hugoeanogueira/1bbd3251f3d169fc4901e4abcf640755",
+    "doi": "",
+    "title": "Playwright CDP throttling gist",
+    "version": "",
+    "locator": "code",
+    "accessed": "2026-09-26",
+    "tier": 4
+   }
+  ],
+  "confidence": "corroborated",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-026",
+   "T-029"
+  ]
+ },
+ {
+  "id": "C-020",
+  "claim": "Playwright 1.63 provides 'Pixel 7' (chromium, 412x839, mobile+touch) and 'iPhone 15' (webkit, 393x659) descriptors; browser binaries cannot be downloaded in the planning sandbox.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/(inline node -e)",
+    "doi": "",
+    "title": "spike (inline node -e)",
+    "version": "",
+    "locator": "device dump",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://registry.npmjs.org/@playwright/test",
+    "doi": "",
+    "title": "npm registry: @playwright/test",
+    "version": "1.63.0",
+    "locator": "npm view @playwright/test@1.63.0",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-028",
+   "R-003"
+  ]
+ },
+ {
+  "id": "C-021",
+  "claim": "Playwright WebKit is a patched WebKit build, not Safari; it is not a substitute for real Safari/iOS hardware.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://dev.to/remotebrowser2/playwright-supported-browsers-chromium-firefox-webkit-45nh",
+    "doi": "",
+    "title": "Playwright supported browsers",
+    "version": "",
+    "locator": "WebKit is not Safari",
+    "accessed": "2026-09-26",
+    "tier": 3
+   }
+  ],
+  "confidence": "single-source",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "G-003"
+  ]
+ },
+ {
+  "id": "C-022",
+  "claim": "The official MusicXML 4.0 XSD imports xml.xsd/xlink.xsd by remote URL; xmllint needs the imports rewritten to local copies.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/xsd",
+    "doi": "",
+    "title": "spike xsd",
+    "version": "",
+    "locator": "sed rewrite; validation log",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "T-006",
+   "plan/ENVIRONMENT.md"
+  ]
+ },
+ {
+  "id": "C-023",
+  "claim": "vitest 5.0.2 peers vite ^6.4||^7||^8; vite 8.3.1 requires node ^20.19 || >=22.12.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "https://registry.npmjs.org/vitest",
+    "doi": "",
+    "title": "npm registry: vitest",
+    "version": "5.0.2",
+    "locator": "npm view vitest@5.0.2",
+    "accessed": "2026-09-26",
+    "tier": 1
+   },
+   {
+    "url": "https://registry.npmjs.org/vite",
+    "doi": "",
+    "title": "npm registry: vite",
+    "version": "8.3.1",
+    "locator": "npm view vite@8.3.1",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "D-002"
+  ]
+ },
+ {
+  "id": "C-024",
+  "claim": "TF.js cpu backend runs basic-pitch at ~0.5-0.6x realtime in Node (23 s for 13 s audio), far too slow for the desktop target.",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [
+   {
+    "url": "research/spikes/bp_spike.mjs",
+    "doi": "",
+    "title": "spike bp_spike.mjs",
+    "version": "",
+    "locator": "timing lines",
+    "accessed": "2026-09-26",
+    "tier": 1
+   }
+  ],
+  "confidence": "verified",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "DR-03",
+   "R-006"
+  ]
+ },
+ {
+  "id": "C-025",
+  "claim": "Accuracy on Karplus-Strong synthetic fixtures may overstate accuracy on real recordings (distortion, vibrato, bleed).",
+  "kind": "software",
+  "load_bearing": true,
+  "sources": [],
+  "confidence": "inferred",
+  "evidence_class": "n/a",
+  "contradicted_by": [],
+  "informs": [
+   "A-016",
+   "R-005"
+  ]
+ }
+]
