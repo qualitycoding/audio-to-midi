@@ -28,3 +28,14 @@
 | R-029 | Analysis on main thread: UI may stall during long analyses (worker dropped, DEVIATIONS §1) | technical | Medium | medium (long stems) | unverifiable worker bundle in impl sandbox | DEVIATIONS §1, D-023 premise falsified | proposal in DEVIATIONS §1: module worker + T-020/T-028 re-run before next release; until then disclosed |
 | R-030 | Duplicate stem names export the first same-named stem's notes for every match (export.ts find-by-name) | technical | Medium | low | no dedupe in validateSelection + name-keyed lookup | reviews/CODE_REVIEW.md CR-1 (A-006) | proposed fix: carry StemState through frettedStems; add regression test via Phase-2 machinery |
 | R-031 | sub-A0 octave-ghost suppression (mergeLow) ships without a committed regression test | verification-gap | Medium | — | diag test zz_diag3 never committed | reviews/CODE_REVIEW.md CR-2 (A-006) | add ghost-note fixture via Phase-2 machinery (new test, red-verify, re-freeze) |
+
+## v3.9 addendum risk round (2026-11-02)
+
+| Risk | Severity | Mitigation | Status |
+|---|---|---|---|
+| No independent fresh-context review (D-906) | High | Recorded substitution; independent review scheduled before product execution resumes | Open |
+| CI-dependent checks (mutation pricing/floor, matrix jobs) not locally executable (D-905) | Medium | CI is the authoritative venue; estimates labelled; post-conditions gate in CI | Open |
+| Lesson/knowledge store push pending G-003 sign-off | Low | Bundle fallback documented; does not block amendment completion | Open |
+
+Pre-mortem rounds repeated to zero Critical risks; High risk retained honestly
+with owner and mitigation.

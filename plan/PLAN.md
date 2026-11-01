@@ -1,6 +1,6 @@
 # Plan
 
-> **Addendum 2026-11-01 (protocol v3.6 era):** this plan was written against planning-protocol v3.1.
+> **Addendum 2026-11-01 (protocol v3.9 era):** this plan was written against planning-protocol v3.1.
 > `plan/ADDENDUM.md` retro-applies the v3.2–v3.6 additions and is part of this plan: steps A-001..A-011
 > (all complete except the human response to gate G-004). Status facts below describe the base plan.
 
@@ -351,3 +351,12 @@ Reading order: HANDOFF.md → plan/PROFILE.md → plan/ASSUMPTIONS.md → plan/D
 
 ## Resume rule (implementer)
 On start, read `.checkpoints/impl-state.json`; verify `npm run verify:freeze`; resume at the first step not in `completed`. Every step is idempotent: re-running rewrites the same files and re-runs its tests.
+
+
+## Amendment closing/review steps (v3.9)
+
+- **S-000** — Intake and environment probe (recorded at plan intake).
+- **S-REVIEW** — Traditional code review before packaging/release.
+- **S-ADVERSARIAL** — Adversarial review of security/correctness claims.
+- **S-RETRO** — Retrospective: review execution log, deviations and gate records.
+- **S-KNOW** — Knowledge/lessons: record classified lessons and knowledge items; G-003 controls publication to the Lessons and knowledge stores.

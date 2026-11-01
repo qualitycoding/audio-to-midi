@@ -11,3 +11,11 @@
 - Questions: paste 1–3 PerfReport JSONs from real phones (any; at least one iOS or Android if available) or reply `none`.
 - Allowed responses: `reports: <json…>` → implementer validates with `validatePerfReport`, commits to `perf/results/real-*.json`, updates `perf/MOBILE.md`; `none` → record "no real-device figures" in `perf/MOBILE.md`; `stop` → halt.
 - G-001 is N/A (no `math`/`computational`).
+
+## G-003 — split learning stores (v3.9)
+
+Lessons and knowledge are pushed to **separate** stores: the `Lessons`
+repository and the `knowledge` repository. G-003 requests the destinations at
+plan close; **do-not-push** either store until human sign-off; the documented
+bundle fallback applies when sign-off is withheld. Store publication never holds
+up the repository amendment's completion record.

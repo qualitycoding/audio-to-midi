@@ -73,3 +73,11 @@ Scope: every `A-###` in `plan/ASSUMPTIONS.md` (A-001..A-022); premises behind lo
 - New risks raised here: R-023 (High), R-027 (Low), R-028 (Low — gate record not committed), R-029 (Medium).
 - No load-bearing falsified item requires re-planning (2E.4 scope): the falsified premises were
   executed around during implementation and their consequences are disclosed and tracked.
+
+## v3.9 addendum assumption audit (2026-11-02)
+
+| Assumption | Basis | Verdict |
+|---|---|---|
+| Audited baseline `v3.6` is accurate | Addendum gap audit at rollout | Accepted (verified by final consistency check) |
+| Source-tip drift is the rollout's own addendum commit | Commit message + parent chain | Confirmed (D-901) |
+| No local build/mutation execution available | Sandbox probe (git transport blocked; API-only writes) | Confirmed; CI substitution recorded (D-905) |

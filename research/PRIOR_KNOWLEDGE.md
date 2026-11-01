@@ -34,3 +34,10 @@ project's claims.json by the addendum (A-010) and are the seed of what future R0
 blocked; A-042). Recorded in `.checkpoints/state.json` `knowledge_store.readable = false` — per
 0.3.7 this is a note, not a blocker. The push gate for these items is **G-004** (GATE-G-004.md);
 the bundle fallback carries them if the gate is not answered from this environment.
+
+## R0 prior-knowledge load — v3.9 addendum (2026-11-02)
+
+Loaded from the knowledge store topics relevant to this amendment: planning
+protocol v3.9 change record, mutation-in-CI pricing practice, split
+lesson/knowledge store semantics, ephemeral-environment durable-mount
+discipline. No repository product knowledge is altered by this amendment.
