@@ -98,7 +98,8 @@
   ".github/workflows/ci.yml": "0937477740c94d28d13eaf1a5302a76113ff3eb7bf136ed257b85023a02e008a",
   ".github/workflows/deploy.yml": "85826e167776732963e163fbb635b671ba71e068d50299dc82b27d81650cfeaf",
   "tests/FROZEN_MANIFEST.sha256": "3efdd4426a83a69b16265239f6a8c58272110be8ec41f3fa8cf3cd891ab31664",
-  "tests/e2e/perf.spec.ts": "975279361745e0d008ede01d79c593ffaed285e5e14b64ed4e97c6b42282f484"
+  "tests/e2e/perf.spec.ts": "975279361745e0d008ede01d79c593ffaed285e5e14b64ed4e97c6b42282f484",
+  "ADDENDUM-V3.9-STATUS.md": "pending-write"
  },
  "execution_context": {
   "current_objective": "Retroactively apply planning-protocol v3.2-v3.6 additions to the completed audio-to-midi v0.1.0 repo (plan written against v3.1).",
@@ -115,7 +116,12 @@
   },
   "scratchpad": "All A-steps green. Schema check exit 0. Unit 87/88 (xmllint env-blocked, CI named), accuracy 3/3, freeze OK, src untouched. prod-smoke amended (D-034), CI builds bundle per PR (D-036). Bundle fallback next.",
   "in_flight_operation": null,
-  "tool_cache": {}
+  "tool_cache": {},
+  "objective": "v3.9 planning addendum amendment (planning-only)",
+  "protocol": "v3.9",
+  "protocol_commit": "ef99285404419153dd5f9aaae14f14bb53604a62",
+  "implementation_branch": "impl-v39-addendum-20261102",
+  "amended_on": "2026-11-02"
  },
  "active_variables": {
   "intake_parameters": {
@@ -148,7 +154,10 @@
    "D-037 perf.spec.ts amendment (TEST_CHALLENGE, re-frozen)"
   ],
   "uncommitted_drafts": {},
-  "variable_store": {}
+  "variable_store": {},
+  "baseline": "v3.6",
+  "source_tip": "f7181c1745de39c90f7dca0933a118ef55f738fc",
+  "audited_commit": "549d0687f9466926a9cb3af2f6f327bdae03564e"
  },
  "tier_substitutions": [
   {
@@ -204,5 +213,6 @@
   "K-20261101T043000Z-twelve-tet-formula",
   "K-20261101T043000Z-vite-vitest-node-peers"
  ],
- "updated_at": "2026-11-01T05:35:00Z"
+ "updated_at": "2026-11-01T05:35:00Z",
+ "lesson_store": "qualitycoding/Lessons"
 }
