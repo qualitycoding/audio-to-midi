@@ -38,3 +38,5 @@ a lesson, see lessons/)
 | 2026-11-01T05:03Z | G-004 push: knowledge | 2 | pass | — | 18/25 generated K-items dropped as already-curated duplicates; 7 new filed (3 new subjects; tfjs/nodejs tag remap to store vocabulary); schema+index OK; attempt 1 transport timeout, attempt 2 @89da6c7; ls-remote verified; DEVIATIONS §10 |
 | 2026-11-01T05:25Z | R-023 human decision | 1 | pass | — | human approved option (b): unfreeze-and-extend tests/e2e/perf.spec.ts |
 | 2026-11-01T05:28Z | D-037 amendment | 1 | pass | — | TEST_CHALLENGE.md (DR-10); spec amended (click play → poll startLatencyMs → stop → bench; desktop asserts > 0); tsc+build clean; unit 87/88 (T-006 XSD xmllint env-block, pre-existing); accuracy 3/3; manifest re-frozen, 26/26 verify; R-023 closed; DEVIATIONS §11 |
+| S-ADD-000 | 1 | pass | `5eae2559d874` || S-ADD-001 | 1 | pass | `96cc75ec3990` || S-ADD-060 | 1 | pass | `6e01fada0203` || S-ADD-070 | 1 | pass | `6e01fada0203` || S-ADD-080 | 1 | pass | `6e01fada0203` || S-ADD-090 | 1 | pass | verifier run below |
+| S-ADD-100 | 1 | pass | remote `6e01fada0203` verified |
