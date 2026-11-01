@@ -9,3 +9,7 @@
 
 ## Not-applicable sections
 2A (all), 2C, 2D, 1.3-R2b, 2B.2 provenance contract, 2B numerical V&V categories, 0.3.3–0.3.5, 3.4 `[computational]` clause, Rule 7, Rule 8, G-001, and the artifacts `research/NOVELTY.md`, `math/**`, `figures/SPEC.md`, `manuscript/**`.
+
+## v3.9 addendum profile confirmation
+
+Active profiles unchanged; `software` active; `software.deploys` unchanged. Target protocol v3.9.

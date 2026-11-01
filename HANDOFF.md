@@ -1,5 +1,7 @@
 # HANDOFF — audio-to-midi v0.1
 
+
+Reading order: `HANDOFF.md` → `ADDENDUM-PLAN-V3.9.md` → `plan/PLAN.md`. Later protocol amendments take precedence only where the gap ledger says so.
 **Purpose.** Build and ship (behind a human gate) a client-side GitHub Pages app that loads audio stems, shows zoomable waveforms with note/chord labels and a BPM grid, plays selected stems, and exports MIDI, ASCII tab and MusicXML. **Active profile:** `software` (`software.deploys = true`).
 
 **Reading order.** HANDOFF.md → plan/PROFILE.md → plan/ASSUMPTIONS.md → plan/DECISIONS.md → tests/INDEX.md → plan/PLAN.md → plan/GATES.md → plan/OPERATIONS.md → plan/ENVIRONMENT.md. Background: research/claims.json, premortem/RISK_REGISTER.md.
