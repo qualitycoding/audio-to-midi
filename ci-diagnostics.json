@@ -1,0 +1,13 @@
+{
+  "project": "mobile-chromium",
+  "generatedAt": "2026-11-02T14:54:25.323Z",
+  "stats": {
+    "startTime": "2026-11-02T14:53:38.885Z",
+    "duration": 46173.518,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}
