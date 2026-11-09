@@ -1,0 +1,16 @@
+{
+  "schema": "a2m-perf/1",
+  "appCommit": "216ea2e",
+  "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36",
+  "device": "Android phone (real device)",
+  "backend": "wasm",
+  "hardwareConcurrency": 8,
+  "stemSeconds": 240,
+  "decodeMs": 0,
+  "analysisMs": 39958.699999928474,
+  "realtimeFactor": 6.006201402959295,
+  "zoomFrameMsMedian": 3.399999976158142,
+  "zoomFrameMsP95": 7,
+  "playStartLatencyMs": 0,
+  "timestampUtc": "2026-09-27T11:10:13.268Z"
+}
