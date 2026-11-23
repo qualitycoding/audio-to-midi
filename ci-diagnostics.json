@@ -1,0 +1,13 @@
+{
+  "project": "desktop-perf",
+  "generatedAt": "2026-11-23T17:33:01.247Z",
+  "stats": {
+    "startTime": "2026-11-23T17:32:16.286Z",
+    "duration": 44089.565,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failures": []
+}

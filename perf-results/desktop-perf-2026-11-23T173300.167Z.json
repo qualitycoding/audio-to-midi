@@ -1,0 +1,16 @@
+{
+  "schema": "a2m-perf/1",
+  "appCommit": "d1db1ef",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+  "device": "Desktop Chrome (CI runner)",
+  "backend": "wasm",
+  "hardwareConcurrency": 4,
+  "stemSeconds": 240,
+  "decodeMs": 92.60000000003492,
+  "analysisMs": 36667.90000000002,
+  "realtimeFactor": 6.545234387570596,
+  "zoomFrameMsMedian": 1.2000000000116415,
+  "zoomFrameMsP95": 2.3999999999650754,
+  "playStartLatencyMs": 0,
+  "timestampUtc": "2026-11-23T17:33:00.167Z"
+}
